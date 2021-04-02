@@ -1,1 +1,1 @@
-# fullstack-final-proj-gr7
+goit21-22-final-proj-gr7-frontend
