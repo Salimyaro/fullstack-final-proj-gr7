@@ -22,9 +22,9 @@ export default function App() {
   useEffect(() => {}, []);
 
   return (
-    <div>
+    <>
+      <Header />
       <Container>
-        <Header />
         <Suspense fallback={<Loader />}>
           <Switch>
             <PublicRoute path="/auth" restricted>
@@ -47,9 +47,9 @@ export default function App() {
             </PublicRoute>
           </Switch>
         </Suspense>
-        <Footer />
       </Container>
-    </div>
+      <Footer />
+    </>
   );
 }
 
