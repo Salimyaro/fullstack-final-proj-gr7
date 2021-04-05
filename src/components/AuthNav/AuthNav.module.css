@@ -1,0 +1,52 @@
+.link {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  color: #000;
+}
+.link:not(:last-child) {
+  margin-right: 85px;
+}
+.link:last-child {
+  margin-right: 65px;
+}
+.activeLink {
+  border-bottom: 1px solid #ff6b09;
+}
+.navList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .link:not(:last-child) {
+    margin-right: 70px;
+  }
+  .link:last-child {
+    margin-right: 30px;
+  }
+}
+@media (max-width: 560px) {
+  .navContacts {
+    display: none;
+  }
+  .link:not(:last-child) {
+    margin-right: 0;
+  }
+  .link:last-child {
+    margin-right: 0;
+  }
+  .navList {
+    flex-direction: column;
+    width: 100%;
+  }
+  .navList li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    border-bottom: 1px solid #ccc;
+  }
+}
