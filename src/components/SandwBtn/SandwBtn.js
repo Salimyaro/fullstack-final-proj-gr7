@@ -8,7 +8,7 @@ export default function SandwBtn({ onClick }) {
 
   return (
     <button type="button" className={s.sandw} onClick={onClick}>
-      <img src={isModalOpen ? Close : Sandw} alt="sandwich" />
+      <img src={isModalOpen ? Close : Sandw} alt="sandwich-close button" />
     </button>
   );
 }

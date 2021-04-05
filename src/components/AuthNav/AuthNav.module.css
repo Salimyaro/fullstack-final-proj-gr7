@@ -50,3 +50,8 @@
     border-bottom: 1px solid #ccc;
   }
 }
+@media (min-width: 561px) and (max-width: 767px) {
+  .link:last-child {
+    margin-right: 10px;
+  }
+}
