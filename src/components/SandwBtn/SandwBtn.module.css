@@ -1,0 +1,22 @@
+.sandw {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-left: 20px;
+}
+.sandw::before {
+  position: absolute;
+  left: -20px;
+  top: -140%;
+  content: '';
+  display: block;
+  width: 1px;
+  height: 70px;
+  background-color: #ccc;
+}
+@media (min-width: 561px) {
+  .sandw {
+    display: none;
+  }
+}

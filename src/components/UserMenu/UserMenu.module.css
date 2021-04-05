@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+.avatar {
+  margin-right: 4px;
+}
+.name {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: black;
+  margin-right: 20px;
+}
+.btnLoguot {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-left: 20px;
+}
+.btnLoguot::before {
+  position: absolute;
+  left: -20px;
+  top: -140%;
+  content: '';
+  display: block;
+  width: 1px;
+  height: 70px;
+  background-color: #ccc;
+}
+/* .sandw {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-left: 20px;
+}
+.sandw::before {
+  position: absolute;
+  left: -20px;
+  top: -140%;
+  content: '';
+  display: block;
+  width: 1px;
+  height: 70px;
+  background-color: #ccc;
+} */
+@media (max-width: 560px) {
+  .navigationDesc,
+  .userName,
+  .btnLoguot {
+    display: none;
+  }
+}
+/* @media (min-width: 561px) {
+  .sandw {
+    display: none;
+  }
+} */

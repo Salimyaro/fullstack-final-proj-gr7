@@ -1,0 +1,38 @@
+:root {
+  /*FONTS*/
+  --main-font: 'Montserrat', sans-serif;
+
+  /*FONTS WEIGHT*/
+  --extra-bold: 800;
+  --bold: 700;
+  --medium: 500;
+  --regular: 400;
+
+  /*COLORS*/
+  --background-color: #e5e5e5;
+  --background-color-footer: #02172a;
+
+  --logo-dark-color: #121d2e;
+
+  --active-component-color: #ff6b09;
+  --inactive-component-color: #02172a;
+
+  --primary-color-text: #000000;
+  --secondary-color-text: #555555;
+  --white-color: #ffffff;
+  --footer-color-text: rgba(255, 255, 255, 0.4);
+
+  --header-lines: #e2e3e5;
+  --text-underline-color: #00122f;
+
+  --background-google-btn: #fafafa;
+  --border-form: #ced2d1;
+  --placeholder-color-text: #bbbbbb;
+
+  --diagramm-incorrect: #d7d7d7;
+
+  /*BREAKPOINTS*/
+  --desktop: 1280px;
+  --tablet: 768px;
+  --mobile: 320px;
+}
