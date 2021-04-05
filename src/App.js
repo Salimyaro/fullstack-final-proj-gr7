@@ -6,8 +6,8 @@ import Loader from './components/Loader';
 
 import Footer from './components/Footer';
 
-import PrivateRoute from './components/UserMenu/PrivateRoute';
-import PublicRoute from './components/UserMenu/PublicRoute';
+// import PrivateRoute from './components/UserMenu/PrivateRoute';
+// import PublicRoute from './components/UserMenu/PublicRoute';
 
 const AuthPageView = lazy(() => import('./views/AuthPageView'));
 const MainPageView = lazy(() => import('./views/MainPageView'));
@@ -15,11 +15,15 @@ const TestView = lazy(() => import('./views/TestView'));
 const ContactsPageView = lazy(() => import('./views/ContactsPageView'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
+const PublicRoute = lazy(() => import('./components/UserMenu/PublicRoute'));
+const PrivateRoute = lazy(() => import('./components/UserMenu/PrivateRoute'));
 
 export default function App() {
-  // const [authorized, setAuthorized] = useState('false');
+  const [authorized, setAuthorized] = useState(true);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log('useEffect authorized', authorized);
+  }, []);
 
   return (
     <>
@@ -27,22 +31,43 @@ export default function App() {
       <Container>
         <Suspense fallback={<Loader />}>
           <Switch>
-            <PublicRoute path="/auth" restricted>
+            <PublicRoute
+              path="/auth"
+              restricted
+              authorized={authorized}
+              redirectTo="/"
+            >
               <AuthPageView />
             </PublicRoute>
-            <PrivateRoute path="/" exact>
+            <PrivateRoute
+              path="/"
+              restricted
+              authorized={authorized}
+              redirectTo="/auth"
+              exact
+            >
               <MainPageView />
             </PrivateRoute>
-            <PrivateRoute path="/test">
+            <PrivateRoute
+              path="/test"
+              restricted
+              authorized={authorized}
+              redirectTo="/"
+            >
               <TestView />
             </PrivateRoute>
-            <PrivateRoute path="/results">
+            <PrivateRoute
+              path="/results"
+              restricted
+              authorized={authorized}
+              redirectTo="/auth"
+            >
               <ResultsView />
             </PrivateRoute>
-            <PublicRoute path="/useful-info">
+            <PublicRoute path="/useful-info" restricted authorized={authorized}>
               <UsefulInfoView />
             </PublicRoute>
-            <PublicRoute path="/contacts" restricted>
+            <PublicRoute path="/contacts" restricted authorized={authorized}>
               <ContactsPageView />
             </PublicRoute>
           </Switch>
