@@ -11,6 +11,7 @@ import NavLinks from '../NavLinks';
 export default function UserMenu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => setIsModalOpen(state => !state);
+
   return (
     <div className={s.container}>
       <div className={s.navigationDesc}>
@@ -34,7 +35,7 @@ export default function UserMenu() {
       {isModalOpen && (
         <Modal onClose={toggleModal}>
           <div className={styles.navContactsMob}>
-            <NavLinks />
+            <NavLinks onClick={toggleModal} />
             <button
               type="button"
               style={{

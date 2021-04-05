@@ -41,6 +41,7 @@ export default function AuthNav() {
                 exact
                 className={styles.linkMob}
                 activeClassName={s.activeLink}
+                onClick={toggleModal}
               >
                 Contacts
               </NavLink>
