@@ -6,8 +6,8 @@ import Loader from './components/Loader';
 
 import Footer from './components/Footer';
 
-// import PrivateRoute from './components/UserMenu/PrivateRoute';
-// import PublicRoute from './components/UserMenu/PublicRoute';
+import PrivateRoute from './components/UserMenu/PrivateRoute';
+import PublicRoute from './components/UserMenu/PublicRoute';
 
 const AuthPageView = lazy(() => import('./views/AuthPageView'));
 const MainPageView = lazy(() => import('./views/MainPageView'));
@@ -15,11 +15,9 @@ const TestView = lazy(() => import('./views/TestView'));
 const ContactsPageView = lazy(() => import('./views/ContactsPageView'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
-const PublicRoute = lazy(() => import('./components/UserMenu/PublicRoute'));
-const PrivateRoute = lazy(() => import('./components/UserMenu/PrivateRoute'));
 
 export default function App() {
-  const [authorized, setAuthorized] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     console.log('useEffect authorized', authorized);
