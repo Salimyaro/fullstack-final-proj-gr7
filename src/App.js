@@ -17,9 +17,11 @@ const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
 
 export default function App() {
-  // const [authorized, setAuthorized] = useState('false');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log('useEffect isLoggedIn', isLoggedIn);
+  }, []);
 
   return (
     <>
@@ -27,22 +29,43 @@ export default function App() {
       <Container>
         <Suspense fallback={<Loader />}>
           <Switch>
-            <PublicRoute path="/auth" restricted>
+            <PublicRoute
+              path="/auth"
+              restricted
+              isLoggedIn={isLoggedIn}
+              redirectTo="/"
+            >
               <AuthPageView />
             </PublicRoute>
-            <PrivateRoute path="/" exact>
+            <PrivateRoute
+              path="/"
+              restricted
+              isLoggedIn={isLoggedIn}
+              redirectTo="/auth"
+              exact
+            >
               <MainPageView />
             </PrivateRoute>
-            <PrivateRoute path="/test">
+            <PrivateRoute
+              path="/test"
+              restricted
+              isLoggedIn={isLoggedIn}
+              redirectTo="/"
+            >
               <TestView />
             </PrivateRoute>
-            <PrivateRoute path="/results">
+            <PrivateRoute
+              path="/results"
+              restricted
+              isLoggedIn={isLoggedIn}
+              redirectTo="/auth"
+            >
               <ResultsView />
             </PrivateRoute>
-            <PublicRoute path="/useful-info">
+            <PublicRoute path="/useful-info" restricted isLoggedIn={isLoggedIn}>
               <UsefulInfoView />
             </PublicRoute>
-            <PublicRoute path="/contacts" restricted>
+            <PublicRoute path="/contacts" restricted isLoggedIn={isLoggedIn}>
               <ContactsPageView />
             </PublicRoute>
           </Switch>
