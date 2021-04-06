@@ -1,16 +1,8 @@
-// import styles from './Header.module.css';
-
-// export default function Header() {
-//   return (
-//     <header className={styles.header}>
-//       This is header Logo Navigation UsefulInfo
-//     </header>
-//   );
-// }
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Navigation from '../Navigation';
 import UserMenu from '../UserMenu';
 import AuthNav from '../AuthNav';
+// import AuthContext from '../../contexts/auth/context';
 
 import React from 'react';
 import {
@@ -36,15 +28,7 @@ const useStyles = makeStyles(theme => ({
 export default function AppBar() {
   const classes = useStyles();
   const [isLoggedIn, setisLoggedIn] = useState(true);
-
-  // const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     dispatch(contactsOperations.clearItems());
-  //   }
-  // }, [dispatch, isLoggedIn]);
+  // const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <MuiAppBar position="static" className={classes.root}>
