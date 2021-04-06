@@ -6,12 +6,12 @@ import DefaultAvatar from '../../img/default-avatar.jpg';
 import SandwBtn from '../SandwBtn';
 import Modal from '../Modal';
 import NavLinks from '../NavLinks';
-// import AuthContext from '../../contexts/auth/context';
+import AuthContext from '../../contexts/auth/context';
 
 export default function UserMenu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => setIsModalOpen(state => !state);
-  // const { user } = useContext(AuthContext);
+  const { user, onLogOut } = useContext(AuthContext);
 
   return (
     <div className={s.container}>
@@ -28,7 +28,7 @@ export default function UserMenu() {
         />
         <span className={s.userName}>Welcome, </span>
       </p>
-      <button type="button" className={s.btnLoguot}>
+      <button onClick={onLogOut} type="button" className={s.btnLoguot}>
         <img src={LogOut} alt="loguot" />
       </button>
 
@@ -38,6 +38,7 @@ export default function UserMenu() {
           <div className={styles.navContactsMob}>
             <NavLinks onClick={toggleModal} />
             <button
+              onClick={onLogOut}
               type="button"
               style={{
                 border: 'none',
