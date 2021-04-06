@@ -1,3 +1,12 @@
+import React from 'react';
+import Blockquote from '../components/Blockquote';
+import TestMenu from '../components/TestMenu';
+
 export default function MainPageView() {
-  return <div>MainPage</div>;
+  return (
+    <>
+      <Blockquote />
+      <TestMenu />
+    </>
+  );
 }
