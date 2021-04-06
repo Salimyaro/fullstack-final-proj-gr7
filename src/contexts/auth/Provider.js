@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react';
 import authContext from './context';
 import axios from 'axios';
+require('dotenv').config();
+const BaseUrl = process.env.BASE_URL;
 
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const token = {
     set(token) {
@@ -17,9 +19,7 @@ export default function Provider({ children }) {
 
   const fetchLoginData = async () => {
     try {
-      const { data } = await axios.post(
-        'https://protest-backend.goit.global/auth/login',
-      );
+      const { data } = await axios.post(`${BaseUrl}/auth/login`);
       token.set(data.accessToken);
       return data;
     } catch (error) {
@@ -29,6 +29,7 @@ export default function Provider({ children }) {
 
   const onLogIn = () => {
     const userData = fetchLoginData();
+    console.log(userData);
 
     setUser({ userData });
     setIsLoggedIn(true);
@@ -36,7 +37,7 @@ export default function Provider({ children }) {
 
   const fetchLogoutData = async () => {
     try {
-      await axios.post('https://protest-backend.goit.global/auth/logout');
+      await axios.post(`${BaseUrl}/auth/logout`);
       token.unset();
     } catch (error) {
       return error;
@@ -47,6 +48,7 @@ export default function Provider({ children }) {
     fetchLogoutData();
     setUser(null);
     setIsLoggedIn(false);
+    console.log(BaseUrl);
   };
 
   const providerValue = useMemo(() => {
