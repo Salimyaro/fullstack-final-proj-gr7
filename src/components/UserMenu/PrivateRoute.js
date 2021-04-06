@@ -5,11 +5,10 @@ export default function PrivateRoute({
   restricted = true,
   ...routeProps
 }) {
-  console.log('privateRoute authorized', routeProps.authorized);
+  console.log('privateRoute isLoggedIn', routeProps.isLoggedIn);
   return (
     <Route {...routeProps}>
-      {' '}
-      {routeProps.authorized ? (
+      {routeProps.isLoggedIn ? (
         children
       ) : (
         <Redirect to={routeProps.redirectTo} />
