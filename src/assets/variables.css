@@ -2,6 +2,12 @@
   /*FONTS*/
   --main-font: 'Montserrat', sans-serif;
 
+  /*FONTS WEIGHT*/
+  --extra-bold: 800;
+  --bold: 700;
+  --medium: 500;
+  --regular: 400;
+
   /*COLORS*/
   --background-color: #e5e5e5;
   --background-color-footer: #02172a;
@@ -24,4 +30,9 @@
   --placeholder-color-text: #bbbbbb;
 
   --diagramm-incorrect: #d7d7d7;
+
+  /*BREAKPOINTS*/
+  --desktop: 1280px;
+  --tablet: 768px;
+  --mobile: 320px;
 }

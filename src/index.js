@@ -5,6 +5,8 @@ import 'modern-normalize/modern-normalize.css';
 import App from './App';
 import AuthProvider from './contexts/auth/Provider';
 
+import './index.css';
+
 ReactDOM.render(
   <BrowserRouter>
     <AuthProvider>
