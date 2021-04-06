@@ -1,5 +1,6 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
 import { Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Container from './components/Container';
 import Header from './components/Header';
 import Loader from './components/Loader';
@@ -29,6 +30,13 @@ export default function App() {
       <Container>
         <Suspense fallback={<Loader />}>
           <Switch>
+
+            <AuthPageView />
+            {/* <PublicRoute path="/auth" restricted>
+              <AuthPageView />
+            </PublicRoute> */}
+            <PrivateRoute path="/" exact>
+
             <PublicRoute
               path="/auth"
               restricted
@@ -44,6 +52,7 @@ export default function App() {
               redirectTo="/auth"
               exact
             >
+
               <MainPageView />
             </PrivateRoute>
             <PrivateRoute
@@ -70,6 +79,7 @@ export default function App() {
             </PublicRoute>
           </Switch>
         </Suspense>
+        <ToastContainer autoClose={3000} />
       </Container>
       <Footer />
     </>

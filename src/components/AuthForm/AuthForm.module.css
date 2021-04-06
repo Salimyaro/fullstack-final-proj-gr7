@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 505px;
+  background-color: white;
+}
+
+.account {
+  margin-top: 62px;
+  margin-bottom: 30px;
+}
+
+.login {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.input {
+  width: 425px;
+  height: 56px;
+  margin-bottom: 24px;
+}
