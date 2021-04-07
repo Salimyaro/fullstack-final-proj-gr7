@@ -30,51 +30,23 @@ export default function App() {
       <Container>
         <Suspense fallback={<Loader />}>
           <Switch>
-
             <AuthPageView />
             {/* <PublicRoute path="/auth" restricted>
               <AuthPageView />
             </PublicRoute> */}
             <PrivateRoute path="/" exact>
-
-            <PublicRoute
-              path="/auth"
-              restricted
-              isLoggedIn={isLoggedIn}
-              redirectTo="/"
-            >
-              <AuthPageView />
-            </PublicRoute>
-            <PrivateRoute
-              path="/"
-              restricted
-              isLoggedIn={isLoggedIn}
-              redirectTo="/auth"
-              exact
-            >
-
               <MainPageView />
             </PrivateRoute>
-            <PrivateRoute
-              path="/test"
-              restricted
-              isLoggedIn={isLoggedIn}
-              redirectTo="/"
-            >
+            <PrivateRoute path="/test">
               <TestView />
             </PrivateRoute>
-            <PrivateRoute
-              path="/results"
-              restricted
-              isLoggedIn={isLoggedIn}
-              redirectTo="/auth"
-            >
+            <PrivateRoute path="/results">
               <ResultsView />
             </PrivateRoute>
-            <PublicRoute path="/useful-info" restricted isLoggedIn={isLoggedIn}>
+            <PublicRoute path="/useful-info">
               <UsefulInfoView />
             </PublicRoute>
-            <PublicRoute path="/contacts" restricted isLoggedIn={isLoggedIn}>
+            <PublicRoute path="/contacts" restricted>
               <ContactsPageView />
             </PublicRoute>
           </Switch>
