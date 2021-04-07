@@ -4,6 +4,8 @@ import { ToastContainer } from 'react-toastify';
 import Container from './components/Container';
 import Header from './components/Header';
 import Loader from './components/Loader';
+import Contacts from './components/Contacts';
+import { contactsDb } from './components/Contacts/contactsDb';
 
 import Footer from './components/Footer';
 
@@ -27,14 +29,17 @@ export default function App() {
   return (
     <>
       <Header />
-      <Container>
+      /---/
+      {/* <Container>
         <Suspense fallback={<Loader />}>
           <Switch>
-            <AuthPageView />
-            {/* <PublicRoute path="/auth" restricted>
+            <AuthPageView /> */}
+      /---/
+      {/* <PublicRoute path="/auth" restricted>
               <AuthPageView />
             </PublicRoute> */}
-            <PrivateRoute path="/" exact>
+      /---/
+      {/* <PrivateRoute path="/" exact>
               <MainPageView />
             </PrivateRoute>
             <PrivateRoute path="/test">
@@ -52,7 +57,9 @@ export default function App() {
           </Switch>
         </Suspense>
         <ToastContainer autoClose={3000} />
-      </Container>
+      </Container> */}
+      /---/
+      <Contacts items={contactsDb} />
       <Footer />
     </>
   );
