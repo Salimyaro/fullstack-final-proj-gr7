@@ -6,10 +6,12 @@ export default function PublicRoute({
   restricted = false,
   ...routeProps
 }) {
-  console.log('publicRoute isLoggedIn', routeProps.isLoggedIn);
+  // console.log('publicRoute routeProps', routeProps);
+
+  // console.log('publicRoute isLoggedIn', routeProps.isLoggedIn);
   const shouldRedirect =
     routeProps.isLoggedIn && restricted && routeProps.redirectTo;
-  console.log(shouldRedirect);
+  // console.log(shouldRedirect);
   return (
     <Route {...routeProps}>
       {shouldRedirect ? <Redirect to={routeProps.redirectTo} /> : children}

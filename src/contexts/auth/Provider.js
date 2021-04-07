@@ -1,12 +1,13 @@
 import { useState, useMemo } from 'react';
 import authContext from './context';
 import axios from 'axios';
-require('dotenv').config();
-const BaseUrl = process.env.BASE_URL;
+axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log('state user:', user);
+  console.log('state isLoggedIn:', isLoggedIn);
 
   const token = {
     set(token) {
@@ -17,38 +18,24 @@ export default function Provider({ children }) {
     },
   };
 
-  const fetchLoginData = async () => {
-    try {
-      const { data } = await axios.post(`${BaseUrl}/auth/login`);
-      token.set(data.accessToken);
-      return data;
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const onLogIn = () => {
-    const userData = fetchLoginData();
-    console.log(userData);
-
-    setUser({ userData });
+  const onLogIn = async user => {
+    const { data } = await axios.post('/auth/login', user);
+    // console.log(data.data);
+    setUser(data.data);
     setIsLoggedIn(true);
+    token.set(data.data.token);
+    window.localStorage.setItem('token-stor', JSON.stringify(data.data.token));
+
+    return data;
   };
 
-  const fetchLogoutData = async () => {
-    try {
-      await axios.post(`${BaseUrl}/auth/logout`);
-      token.unset();
-    } catch (error) {
-      return error;
-    }
-  };
+  const onLogOut = async () => {
+    const { data } = await axios.post('/auth/logout');
 
-  const onLogOut = () => {
-    fetchLogoutData();
     setUser(null);
     setIsLoggedIn(false);
-    console.log(BaseUrl);
+    token.unset();
+    return data;
   };
 
   const providerValue = useMemo(() => {

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import s from './UserMenu.module.css';
 import styles from '../AuthNav/AuthMobile.module.css';
-import LogOut from '../../img/sign-out.png';
+import LogOutImg from '../../img/sign-out.png';
 import DefaultAvatar from '../../img/default-avatar.jpg';
 import SandwBtn from '../SandwBtn';
 import Modal from '../Modal';
@@ -26,10 +26,10 @@ export default function UserMenu() {
           height="30"
           style={{ marginRight: '15px', borderRadius: '50%' }}
         />
-        <span className={s.userName}>Welcome, </span>
+        <span className={s.userName}>{user?.email} </span>
       </p>
       <button onClick={onLogOut} type="button" className={s.btnLoguot}>
-        <img src={LogOut} alt="loguot" />
+        <img src={LogOutImg} alt="loguot" />
       </button>
 
       <SandwBtn isModalOpen={isModalOpen} onClick={toggleModal} />
@@ -47,7 +47,7 @@ export default function UserMenu() {
                 marginTop: '26px',
               }}
             >
-              <img src={LogOut} alt="loguot" />
+              <img src={LogOutImg} alt="loguot" />
             </button>
           </div>
         </Modal>

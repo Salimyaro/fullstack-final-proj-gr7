@@ -8,11 +8,7 @@ export default function PrivateRoute({
   console.log('privateRoute isLoggedIn', routeProps.isLoggedIn);
   return (
     <Route {...routeProps}>
-      {routeProps.isLoggedIn ? (
-        children
-      ) : (
-        <Redirect to={routeProps.redirectTo} />
-      )}
+      {routeProps.isLoggedIn ? children : <Redirect to="/auth" />}
     </Route>
   );
 }
