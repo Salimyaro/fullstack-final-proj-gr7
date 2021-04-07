@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 // import axios from 'axios';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
 import { login, signUp } from '../../service/user-api';
 import s from './AuthForm.module.css';
+import AuthContext from '../../contexts/auth/context';
 
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { onLogIn } = useContext(AuthContext);
 
   const handleLogin = async event => {
     event.preventDefault();
@@ -17,9 +19,9 @@ export default function AuthForm() {
       toast.error('Please enter email!');
       return;
     }
-
-    const data = await login({ email, password });
-    console.log('data', data);
+    // const data = await login({ email, password });
+    const data = await onLogIn({ email, password });
+    console.log('dataAuthForm', data);
     reset();
   };
 
@@ -32,7 +34,7 @@ export default function AuthForm() {
     }
 
     const data = await signUp({ email, password });
-    console.log(data);
+    // console.log(data);
     reset();
   };
 

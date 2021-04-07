@@ -29,6 +29,7 @@ export default function AppBar() {
   const classes = useStyles();
   // const [isLoggedIn, setisLoggedIn] = useState(true);
   const { isLoggedIn } = useContext(AuthContext);
+  console.log('heder isLoggedIn:', isLoggedIn);
 
   return (
     <MuiAppBar position="static" className={classes.root}>
