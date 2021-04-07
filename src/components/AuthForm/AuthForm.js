@@ -10,7 +10,7 @@ export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = event => {
+  const handleLogin = async event => {
     event.preventDefault();
 
     if (email.trim() === '') {
@@ -18,13 +18,22 @@ export default function AuthForm() {
       return;
     }
 
-    if (event.target.value === email) {
-      login({ email, password });
-      reset();
-    } else {
-      signUp({ email, password });
-      reset();
+    const data = await login({ email, password });
+    console.log('data', data);
+    reset();
+  };
+
+  const handleRegister = async event => {
+    event.preventDefault();
+
+    if (email.trim() === '') {
+      toast.error('Please enter email!');
+      return;
     }
+
+    const data = await signUp({ email, password });
+    console.log(data);
+    reset();
   };
 
   const handleChangeEmail = event => {
@@ -49,7 +58,7 @@ export default function AuthForm() {
         <Button variant="outlined">Google</Button>
       </Box>
       <p className={s.login}>Or login to our app using e-mail and password: </p>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label>
           <input
             className={s.input}
@@ -75,10 +84,10 @@ export default function AuthForm() {
         </label>
 
         <Box>
-          <Button variant="outlined" type="submit">
+          <Button onClick={handleLogin} variant="outlined" type="submit">
             Sign in
           </Button>
-          <Button variant="outlined" type="button">
+          <Button onClick={handleRegister} variant="outlined" type="submit">
             Sign up
           </Button>
         </Box>
