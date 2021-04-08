@@ -1,0 +1,93 @@
+.container {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  background-color: var(--white-color);
+  font-family: var(--main-font);
+}
+
+.heading {
+  font-size: 22px;
+
+  margin-bottom: 10px;
+
+  color: var(--primary-color-text);
+  font-weight: var(--extra-bold);
+
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.testTitle {
+  margin-bottom: 30px;
+
+  font-size: 14px;
+  font-weight: var(--medium);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--primary-color-text);
+}
+
+.lineBreak {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  width: 320px;
+  height: 1px;
+  background-color: #00122f;
+  opacity: 0.15;
+}
+
+.diagram {
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 285px;
+  height: 285px;
+  border-radius: 50%;
+  background-color: var(--active-component-color);
+}
+
+.resultsBar {
+  margin-top: 30px;
+  font-weight: var(--medium);
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.breaker {
+  margin-left: 20px;
+  margin-right: 20px;
+  opacity: 0.15;
+}
+
+.catImage {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.resultsMessage {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: var(--medium);
+  letter-spacing: 0.02em;
+}
+
+.button {
+  display: block;
+  width: 190px;
+  height: 50px;
+  margin: 50px auto 0 auto;
+  padding: 17px 0 17px 0;
+  background-color: var(--active-component-color);
+  color: var(--white-color);
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--inactive-component-color);
+  font-weight: var(--medium);
+}

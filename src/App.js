@@ -20,11 +20,20 @@ const ResultsView = lazy(() => import('./views/ResultsView'));
 
 export default function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, currentUser } = useContext(AuthContext);
+
+  console.log(
+    'token app',
+    JSON.parse(window.localStorage.getItem('token-stor')),
+  );
 
   // useEffect(() => {
-  //   console.log('useEffect isLoggedIn', isLoggedIn);
-  // }, []);
+  //   currentUser();
+  //   console.log(
+  //     'token app useEffect',
+  //     JSON.parse(window.localStorage.getItem('token-stor')),
+  //   );
+  // }, [currentUser]);
 
   return (
     <>

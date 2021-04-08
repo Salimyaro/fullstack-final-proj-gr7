@@ -1,8 +1,9 @@
+@import '../../assets/variables.css';
 .link {
   display: inline-block;
   text-decoration: none;
   font-weight: 700;
-  color: #000;
+  color: var(--primary-color-text);
 }
 .link:not(:last-child) {
   margin-right: 85px;
@@ -11,7 +12,7 @@
   margin-right: 65px;
 }
 .activeLink {
-  border-bottom: 1px solid #ff6b09;
+  border-bottom: 1px solid var(--active-component-color);
 }
 .navList {
   margin: 0;
@@ -47,7 +48,7 @@
     align-items: center;
     justify-content: center;
     min-height: 70px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--header-lines);
   }
 }
 @media (min-width: 561px) and (max-width: 767px) {
