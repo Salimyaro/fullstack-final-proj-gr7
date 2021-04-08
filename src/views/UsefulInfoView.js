@@ -1,3 +1,3 @@
 export default function UsefulInfoView() {
-  return <div>UsefulInfoView fg.sjkngjer</div>;
+  return <div>UsefulInfoView</div>;
 }
