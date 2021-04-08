@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import authContext from './context';
 import axios from 'axios';
 axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
-
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,13 +32,11 @@ export default function Provider({ children }) {
     setIsLoggedIn(true);
     token.set(data.data.token);
     window.localStorage.setItem('token-stor', JSON.stringify(data.data.token));
-
     return data;
   };
 
   const onLogOut = async () => {
     const { data } = await axios.post('/auth/logout');
-
     setUser(null);
     setIsLoggedIn(false);
     token.unset();
@@ -55,7 +52,8 @@ export default function Provider({ children }) {
     const { data } = await axios.get('/user');
     setUser(data.data);
     setIsLoggedIn(true);
-
+    // console.log('currentUser data.data', data.data);
+    // console.log('currentUser data', data);
     return data;
   };
 

@@ -10,7 +10,7 @@ export default function TestMenu() {
           <div className={s.linkText}>QA technical training</div>
         </div>
       </Link>
-      <Link to=" /test?type=tt" exact className={s.link}>
+      <Link to="/test?type=tt" exact className={s.link}>
         <div className={s.textBox}>
           <div className={s.linkText}>Testing theory</div>
         </div>

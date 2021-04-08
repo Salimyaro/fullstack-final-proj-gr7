@@ -14,7 +14,6 @@ export default function AuthNav() {
       <div className={s.navContacts}>
         <NavLink
           to="/contacts"
-          exact
           className={s.link}
           activeClassName={s.activeLink}
         >
@@ -38,7 +37,6 @@ export default function AuthNav() {
             >
               <NavLink
                 to="/contacts"
-                exact
                 className={styles.linkMob}
                 activeClassName={s.activeLink}
                 onClick={toggleModal}
