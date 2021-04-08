@@ -81,7 +81,7 @@ export default function AuthForm() {
             placeholder="Password"
             onChange={handleChangePassword}
             required
-            // autocomplete="off"
+            autoComplete="off"
           />
         </label>
 
