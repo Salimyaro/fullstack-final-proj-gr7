@@ -18,6 +18,14 @@ export default function Provider({ children }) {
     },
   };
 
+  const signUp = async user => {
+    const { data } = await axios.post('/auth/register', user);
+    setUser(data.data);
+    setIsLoggedIn(true);
+    token.set(data.data.token);
+    return data;
+  };
+
   const onLogIn = async user => {
     const { data } = await axios.post('/auth/login', user);
     // console.log(data.data);
@@ -35,11 +43,24 @@ export default function Provider({ children }) {
     setUser(null);
     setIsLoggedIn(false);
     token.unset();
+    window.localStorage.setItem('token-stor', JSON.stringify(''));
+    return data;
+  };
+
+  const currentUser = async () => {
+    if (!JSON.parse(window.localStorage.getItem('token-stor'))) {
+      return;
+    }
+    token.set(JSON.parse(window.localStorage.getItem('token-stor')));
+    const { data } = await axios.get('/user');
+    setUser(data.data);
+    setIsLoggedIn(true);
+
     return data;
   };
 
   const providerValue = useMemo(() => {
-    return { user, isLoggedIn, onLogIn, onLogOut };
+    return { user, isLoggedIn, onLogIn, onLogOut, signUp, currentUser };
   }, [isLoggedIn, user]);
 
   return (

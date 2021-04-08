@@ -3,14 +3,14 @@ import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
-import { login, signUp } from '../../service/user-api';
+// import { login, signUp } from '../../service/user-api';
 import s from './AuthForm.module.css';
 import AuthContext from '../../contexts/auth/context';
 
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { onLogIn } = useContext(AuthContext);
+  const { onLogIn, signUp } = useContext(AuthContext);
 
   const handleLogin = async event => {
     event.preventDefault();
@@ -19,10 +19,10 @@ export default function AuthForm() {
       toast.error('Please enter email!');
       return;
     }
-    // const data = await login({ email, password });
+
     const data = await onLogIn({ email, password });
-    console.log('dataAuthForm', data);
-    reset();
+    // console.log('dataAuthForm log', data);
+    // reset();
   };
 
   const handleRegister = async event => {
@@ -34,8 +34,8 @@ export default function AuthForm() {
     }
 
     const data = await signUp({ email, password });
-    // console.log(data);
-    reset();
+    // console.log('dataAuthForm reg', data);
+    // reset();
   };
 
   const handleChangeEmail = event => {
@@ -46,10 +46,10 @@ export default function AuthForm() {
     setPassword(event.currentTarget.value);
   };
 
-  const reset = () => {
-    setEmail('');
-    setPassword('');
-  };
+  // const reset = () => {
+  //   setEmail('');
+  //   setPassword('');
+  // };
 
   return (
     <div className={s.form}>

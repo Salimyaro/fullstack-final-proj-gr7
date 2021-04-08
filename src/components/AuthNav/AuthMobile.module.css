@@ -1,11 +1,13 @@
+@import '../../assets/variables.css';
+
 .linkMob {
   display: inline-block;
   text-decoration: none;
   font-weight: 700;
-  color: #000;
+  color: var(--primary-color-text);
 }
 .activeLinkMob {
-  border-bottom: 1px solid #ff6b09;
+  border-bottom: 1px solid var(--active-component-color);
 }
 .navContactsMob {
   width: 100%;
