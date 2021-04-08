@@ -1,5 +1,4 @@
-import { blue } from '@material-ui/core/colors';
-import { Pie, defaults } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 export default function Diagram({ rightAnswers, wrongAnswers }) {
   const data = {
