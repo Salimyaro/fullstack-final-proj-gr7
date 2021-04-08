@@ -1,7 +1,3 @@
-// export default function UsefulInfoView() {
-//   return <div>UsefulInfoView</div>;
-// }
-
 import React from 'react';
 
 import s from './UsefulInfoView.module.css';

@@ -22,18 +22,9 @@ export default function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { isLoggedIn, currentUser } = useContext(AuthContext);
 
-  console.log(
-    'token app',
-    JSON.parse(window.localStorage.getItem('token-stor')),
-  );
-
-  // useEffect(() => {
-  //   currentUser();
-  //   console.log(
-  //     'token app useEffect',
-  //     JSON.parse(window.localStorage.getItem('token-stor')),
-  //   );
-  // }, [currentUser]);
+  useEffect(() => {
+    currentUser();
+  }, []);
 
   return (
     <>
@@ -41,18 +32,23 @@ export default function App() {
       <Container>
         <Suspense fallback={<Loader />}>
           <Switch>
-            {/* <AuthPageView /> */}
             <PublicRoute
               path="/auth"
               restricted
               isLoggedIn={isLoggedIn}
               redirectTo="/"
             >
+              <PrivateRoute
+                exact="true"
+                path="/"
+                restricted
+                isLoggedIn={isLoggedIn}
+              >
+                <MainPageView />
+              </PrivateRoute>
               <AuthPageView />
             </PublicRoute>
-            <PrivateRoute path="/" exact restricted isLoggedIn={isLoggedIn}>
-              <MainPageView />
-            </PrivateRoute>
+
             <PrivateRoute path="/test" restricted isLoggedIn={isLoggedIn}>
               <TestView />
             </PrivateRoute>
