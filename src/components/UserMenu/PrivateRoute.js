@@ -1,6 +1,15 @@
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
-export default function PrivateRoute({ children, ...routeProps }) {
-  // const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-  return <Route {...routeProps}>{children} </Route>;
+export default function PrivateRoute({
+  children,
+  restricted = true,
+  ...routeProps
+}) {
+  console.log('privateRoute isLoggedIn', routeProps.isLoggedIn);
+  // console.log('privateRoute user', routeProps.user);
+  return (
+    <Route {...routeProps}>
+      {routeProps.isLoggedIn ? children : <Redirect to="/auth" />}
+    </Route>
+  );
 }

@@ -1,3 +1,3 @@
-export default function Test() {
-  return <div>Useful literature Useful Resources</div>;
+export default function UsefulInfoView() {
+  return <div>UsefulInfoView</div>;
 }

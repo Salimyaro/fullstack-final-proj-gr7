@@ -22,7 +22,7 @@ export default function AuthNav() {
         </NavLink>
       </div>
 
-      <SandwBtn onClick={toggleModal} />
+      <SandwBtn isModalOpen={isModalOpen} onClick={toggleModal} />
       {isModalOpen && (
         <Modal onClose={toggleModal}>
           <div className={styles.navContactsMob}>

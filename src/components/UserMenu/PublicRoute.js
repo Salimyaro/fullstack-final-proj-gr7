@@ -1,16 +1,20 @@
-import { Route } from 'react-router-dom';
+import { useState } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 export default function PublicRoute({
   children,
   restricted = false,
   ...routeProps
 }) {
-  // const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-  // const shouldRedirect = isLoggedIn && restricted;
-  // console.log('shouldRedirect', shouldRedirect);
+  // console.log('publicRoute routeProps', routeProps);
+
+  // console.log('publicRoute isLoggedIn', routeProps.isLoggedIn);
+  const shouldRedirect =
+    routeProps.isLoggedIn && restricted && routeProps.redirectTo;
+  // console.log(shouldRedirect);
   return (
     <Route {...routeProps}>
-      {/* {shouldRedirect ? <Redirect to="/contacts" /> : children} */}
+      {shouldRedirect ? <Redirect to={routeProps.redirectTo} /> : children}
     </Route>
   );
 }

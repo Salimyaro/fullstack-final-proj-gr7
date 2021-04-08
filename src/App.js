@@ -1,8 +1,10 @@
-import { useEffect, useState, Suspense, lazy } from 'react';
+import { useEffect, useState, Suspense, lazy, useContext } from 'react';
 import { Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Container from './components/Container';
 import Header from './components/Header';
 import Loader from './components/Loader';
+import AuthContext from './contexts/auth/context';
 
 import Footer from './components/Footer';
 
@@ -17,9 +19,21 @@ const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
 
 export default function App() {
-  // const [authorized, setAuthorized] = useState('false');
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, currentUser } = useContext(AuthContext);
 
-  useEffect(() => {}, []);
+  console.log(
+    'token app',
+    JSON.parse(window.localStorage.getItem('token-stor')),
+  );
+
+  // useEffect(() => {
+  //   currentUser();
+  //   console.log(
+  //     'token app useEffect',
+  //     JSON.parse(window.localStorage.getItem('token-stor')),
+  //   );
+  // }, [currentUser]);
 
   return (
     <>
@@ -27,26 +41,37 @@ export default function App() {
       <Container>
         <Suspense fallback={<Loader />}>
           <Switch>
-            <PublicRoute path="/auth" restricted>
+            {/* <AuthPageView /> */}
+            <PublicRoute
+              path="/auth"
+              restricted
+              isLoggedIn={isLoggedIn}
+              redirectTo="/"
+            >
               <AuthPageView />
             </PublicRoute>
-            <PrivateRoute path="/" exact>
+            <PrivateRoute path="/" exact restricted isLoggedIn={isLoggedIn}>
               <MainPageView />
             </PrivateRoute>
-            <PrivateRoute path="/test">
+            <PrivateRoute path="/test" restricted isLoggedIn={isLoggedIn}>
               <TestView />
             </PrivateRoute>
-            <PrivateRoute path="/results">
+            <PrivateRoute path="/results" restricted isLoggedIn={isLoggedIn}>
               <ResultsView />
             </PrivateRoute>
-            <PublicRoute path="/useful-info">
+            <PrivateRoute
+              path="/useful-info"
+              restricted
+              isLoggedIn={isLoggedIn}
+            >
               <UsefulInfoView />
-            </PublicRoute>
+            </PrivateRoute>
             <PublicRoute path="/contacts" restricted>
               <ContactsPageView />
             </PublicRoute>
           </Switch>
         </Suspense>
+        <ToastContainer autoClose={3000} />
       </Container>
       <Footer />
     </>
