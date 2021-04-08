@@ -61,6 +61,8 @@ export default function Provider({ children }) {
     return { user, isLoggedIn, onLogIn, onLogOut, signUp, currentUser };
   }, [isLoggedIn, user]);
 
+  console.log('providerValue', providerValue);
+
   return (
     <authContext.Provider value={providerValue}>
       {children}
