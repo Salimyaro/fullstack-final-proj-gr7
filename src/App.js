@@ -5,7 +5,7 @@ import Container from './components/Container';
 import Header from './components/Header';
 import Loader from './components/Loader';
 import AuthContext from './contexts/auth/context';
-
+import {contactsDb} from './components/Contacts/contactsDb'
 import Footer from './components/Footer';
 
 import PrivateRoute from './components/UserMenu/PrivateRoute';
@@ -14,7 +14,7 @@ import PublicRoute from './components/UserMenu/PublicRoute';
 const AuthPageView = lazy(() => import('./views/AuthPageView'));
 const MainPageView = lazy(() => import('./views/MainPageView'));
 const TestView = lazy(() => import('./views/TestView'));
-const ContactsPageView = lazy(() => import('./views/ContactsPageView'));
+const ContactsPageView = lazy(() => import('./components/Contacts'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
 
@@ -36,7 +36,7 @@ export default function App() {
               <AuthPageView />
             </PublicRoute>
             <PublicRoute exact path="/contacts">
-              <ContactsPageView />
+              <ContactsPageView items={contactsDb}/>
             </PublicRoute>
 
             <PrivateRoute exact path="/" redirectTo="/auth">
