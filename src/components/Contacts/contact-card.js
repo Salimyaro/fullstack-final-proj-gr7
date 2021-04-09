@@ -2,7 +2,6 @@ import s from './Contacts.module.css';
 
 export default function ContactsCard({ name, url, photo, role }) {
   return (
-
     <a className={s.contactLink} target="_blank" href={url}>
       <picture>
         <img
@@ -19,6 +18,5 @@ export default function ContactsCard({ name, url, photo, role }) {
         {/* <p>some information about me</p> */}
       </div>
     </a>
-
   );
 }
