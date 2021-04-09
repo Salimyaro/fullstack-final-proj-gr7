@@ -34,7 +34,7 @@ export const contactsDb = [
     name: 'Solomka Vitaliy',
     url: 'https://github.com/dkvvs',
     photo: SolomkaVitaliy,
-    role: 'Back-End Developer',
+    role: 'Front-End Developer',
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ export const contactsDb = [
     name: 'Alexandr Tsotsko',
     url: 'https://github.com/RaiderTs',
     photo: defaultImg,
-    role: 'Front-End Developer',
+    role: 'Back-End Developer',
   },
   {
     id: 9,
