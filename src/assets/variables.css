@@ -9,7 +9,7 @@
   --regular: 400;
 
   /*COLORS*/
-  --background-color: #e5e5e5;
+  --background-color: #f5f6fb;
   --background-color-footer: #02172a;
 
   --logo-dark-color: #121d2e;
@@ -30,6 +30,8 @@
   --placeholder-color-text: #bbbbbb;
 
   --diagramm-incorrect: #d7d7d7;
+
+  --shadow-color: rgba(2, 23, 42, 0.1);
 
   /*BREAKPOINTS*/
   --desktop: 1280px;
