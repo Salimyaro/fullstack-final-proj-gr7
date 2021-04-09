@@ -5,6 +5,7 @@ import SolomkaVitaliy from './img/solomka_vitaliy295.jpg';
 import BondarenkoSvetlana from './img/bondarenko_svetlana295.jpg';
 import TetianaKorobko from './img/Tetiana Korobko295-3.jpg';
 import defaultImg from './img/default4.jpg';
+import Iskra from './img/iskra295-2.jpg';
 
 export const contactsDb = [
   {
@@ -67,7 +68,7 @@ export const contactsDb = [
     id: 9,
     name: 'Mykhailo Iskra',
     url: 'https://github.com/Mykhailoiskra',
-    photo: defaultImg,
+    photo: Iskra,
     role: 'Front-End Developer',
   },
 ];
