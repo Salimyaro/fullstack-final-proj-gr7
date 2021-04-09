@@ -1,46 +1,61 @@
-import { useEffect, Suspense, lazy } from 'react';
+import { useEffect, Suspense, lazy, useContext } from 'react';
 import { Switch } from 'react-router-dom';
-// import AppBar from './components/AppBar';
-// import PrivateRoute from './components/PrivateRoute';
-// import PublicRoute from './components/PublicRoute';
+import { ToastContainer } from 'react-toastify';
+import Container from './components/Container';
+import Header from './components/Header';
+import Loader from './components/Loader';
+import AuthContext from './contexts/auth/context';
+import {contactsDb} from './components/Contacts/contactsDb'
+import Footer from './components/Footer';
 
-// const HomeView = lazy(() => import('./views/HomeView'));
-// const RegisterViev = lazy(() => import('./views/RegisterViev'));
-// const LoginView = lazy(() => import('./views/LoginView'));
-// const ContactsView = lazy(() => import('./views/ContactsView'));
+import PrivateRoute from './components/UserMenu/PrivateRoute';
+import PublicRoute from './components/UserMenu/PublicRoute';
+
+const AuthPageView = lazy(() => import('./views/AuthPageView'));
+const MainPageView = lazy(() => import('./views/MainPageView'));
+const TestView = lazy(() => import('./views/TestView'));
+const ContactsPageView = lazy(() => import('./components/Contacts'));
+const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
+const ResultsView = lazy(() => import('./views/ResultsView'));
 
 export default function App() {
-  useEffect(() => {}, []);
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    currentUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      {/* <AppBar /> */}
-      <Switch>
-        <Suspense fallback={<p>Loading...</p>}>
-          {/* <PublicRoute exact path="/">
-                <HomeView />
-              </PublicRoute>
-              <PublicRoute
-                exact
-                path="/register"
-                redirectTo="/contacts"
-                restricted
-              >
-                <RegisterViev />
-              </PublicRoute>
-              <PublicRoute
-                exact
-                path="/login"
-                redirectTo="/contacts"
-                restricted
-              >
-                <LoginView />
-              </PublicRoute>
-              <PrivateRoute exact path="/contacts" redirectTo="/login">
-                <ContactsView />
-              </PrivateRoute> */}
-        </Suspense>
-      </Switch>
+      <Header />
+      <Container>
+        <Switch>
+          <Suspense fallback={<Loader />}>
+            <PublicRoute exact path="/auth" redirectTo="/" restricted>
+              <AuthPageView />
+            </PublicRoute>
+            <PublicRoute exact path="/contacts">
+              <ContactsPageView items={contactsDb}/>
+            </PublicRoute>
+
+            <PrivateRoute exact path="/" redirectTo="/auth">
+              <MainPageView />
+            </PrivateRoute>
+            <PrivateRoute exact path="/test" redirectTo="/auth">
+              <TestView />
+            </PrivateRoute>
+            <PrivateRoute exact path="/results" redirectTo="/auth">
+              <ResultsView />
+            </PrivateRoute>
+            <PrivateRoute exact path="/useful-info" redirectTo="/auth">
+              <UsefulInfoView />
+            </PrivateRoute>
+          </Suspense>
+        </Switch>
+        <ToastContainer autoClose={3000} />
+      </Container>
+      <Footer />
     </>
   );
 }

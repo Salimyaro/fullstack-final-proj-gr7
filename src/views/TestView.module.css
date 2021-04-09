@@ -1,0 +1,139 @@
+.buttonContainer {
+  font-family: var(--main-font);
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.finishContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 41px;
+}
+
+.buttonFinish {
+  width: 190px;
+  height: 48px;
+  background-color: var(--white-color);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-weight: var(--medium);
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--primary-color-text);
+}
+
+.title {
+  max-width: 157px;
+  text-align: left;
+  font-weight: var(--medium);
+  font-size: 22px;
+  line-height: 26px;
+  color: var(--primary-color-text);
+}
+
+.nextPrevContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 97px;
+}
+
+.nextButton,
+.prevButton,
+.submitButton {
+  display: flex;
+  align-items: center;
+  width: 210px;
+  height: 34px;
+  background-color: var(--white-color);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-weight: var(--medium);
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--primary-color-text);
+}
+
+.nextButton {
+  margin-left: auto;
+}
+
+.submitName {
+  margin: 0 auto;
+}
+
+.arrowLeft {
+  margin-left: 15px;
+  margin-right: 11px;
+}
+
+.nextName {
+  padding-left: 20px;
+  margin-right: 66px;
+}
+
+.buttonFinish:hover,
+.prevButton:hover,
+.nextButton:hover {
+  background-color: var(--active-component-color);
+  color: var(--white-color);
+}
+
+.prevButton:hover img,
+.nextButton:hover img {
+  filter: invert(1);
+}
+
+@media screen and (max-width: 768px) {
+  .buttonContainer {
+    max-width: 652px;
+  }
+
+  .nextPrevContainer {
+    margin-bottom: 271px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .buttonContainer {
+    max-width: 280px;
+  }
+
+  .nextName,
+  .prevName {
+    display: none;
+  }
+
+  .arrowRight {
+    margin-left: 15px;
+  }
+
+  .nextButton,
+  .prevButton {
+    width: 55px;
+    line-height: 14px;
+  }
+
+  .nextPrevContainer {
+    margin-bottom: 20px;
+  }
+
+  .finishContainer {
+    padding-top: 24px;
+  }
+
+  .buttonFinish {
+    width: 130px;
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  .title {
+    max-width: 66px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
