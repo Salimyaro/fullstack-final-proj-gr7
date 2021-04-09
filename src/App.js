@@ -50,7 +50,12 @@ export default function App() {
             >
               <AuthPageView />
             </PublicRoute>
-            <PrivateRoute path="/" exact restricted isLoggedIn={isLoggedIn}>
+            <PrivateRoute
+              path="/"
+              exact="true"
+              restricted
+              isLoggedIn={isLoggedIn}
+            >
               <MainPageView />
             </PrivateRoute>
             <PrivateRoute path="/test" restricted isLoggedIn={isLoggedIn}>

@@ -16,14 +16,28 @@ const useStyles = makeStyles(theme => ({
     wrap: 'wrap',
   },
   aboutTest: {
+    textAlign: 'start',
     marginRight: 105,
     marginTop: 71,
   },
   proTest: {
     fontFamily: 'var(--main-font)',
     fontWeight: 'var(--extra-bold)',
+    fontSize: 34,
   },
-  paragraph: {},
+  paragraph: {
+    width: 420,
+    fontFamily: 'var(--main-font)',
+    fontWeight: 'var(--medium)',
+    fontSize: 18,
+    lineHeight: 2,
+    color: 'var(--secondary-color-text)',
+    letterSpacing: 0.32,
+  },
+  span: {
+    fontWeight: 'var(--extra-bold)',
+    color: 'var(--primary-color-text)',
+  },
 }));
 
 export default function AuthPageView() {
@@ -42,19 +56,22 @@ export default function AuthPageView() {
             >
               Pro Test
             </Typography>
-            <Typography component="p" color="inherit" spacing={3} paragraph>
-              <b>[</b> We will help you find weak points in knowledge so that
-              you can strengthen it. We will show you what is relevant to know
-              for a<b> QA Engineer </b> and will try to make the learning
-              process more diverse_ <b>]</b>
+            <Typography component="p" className={classes.paragraph} paragraph>
+              <span className={classes.span}>[</span> We will help you find weak
+              points in knowledge so that you can strengthen it. We will show
+              you what is relevant to know for a
+              <span className={classes.span}> QA Engineer </span> and will try
+              to make the learning process more diverse_{' '}
+              <span className={classes.span}>]</span>
             </Typography>
           </div>
         </Grid>
-        <Grid item md={4}>
-          <div>
-            <AuthForm />
-          </div>
-        </Grid>
+        <div>
+          <AuthForm />
+        </div>
+        {/* <Grid item md={4}>
+          
+        </Grid> */}
       </Grid>
     </div>
   );
