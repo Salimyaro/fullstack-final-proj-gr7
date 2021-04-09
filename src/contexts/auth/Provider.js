@@ -59,6 +59,7 @@ export default function Provider({ children }) {
 
   const providerValue = useMemo(() => {
     return { user, isLoggedIn, onLogIn, onLogOut, signUp, currentUser };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn, user]);
 
   console.log('providerValue', providerValue);
