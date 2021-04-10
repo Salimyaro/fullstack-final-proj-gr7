@@ -16,7 +16,6 @@ const Navigation = () => {
         <>
           <NavLink
             to="/contacts"
-            exact
             className={s.link}
             activeClassName={s.activeLink}
           >

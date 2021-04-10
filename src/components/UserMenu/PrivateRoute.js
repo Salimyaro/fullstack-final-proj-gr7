@@ -1,15 +1,16 @@
+import { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import AuthContext from '../../contexts/auth/context';
 
 export default function PrivateRoute({
   children,
-  // restricted = true,
+  redirectTo = '/',
   ...routeProps
 }) {
-  console.log('privateRoute isLoggedIn', routeProps.isLoggedIn);
-  // console.log('privateRoute user', routeProps.user);
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <Route {...routeProps}>
-      {routeProps.isLoggedIn ? children : <Redirect to="/auth" />}
+      {isLoggedIn ? children : <Redirect to={redirectTo} />}
     </Route>
   );
 }

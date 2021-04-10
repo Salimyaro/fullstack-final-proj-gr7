@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     color: 'var(--primary-color-text)',
     border: '1px solid #CED2D1',
 
-    '&:hover': {
+    '&:hover, &:focus': {
       backgroundColor: 'var(--active-component-color)',
       color: 'var(--white-color)',
     },
@@ -49,9 +49,7 @@ export default function AuthForm() {
       return;
     }
 
-    const data = await onLogIn({ email, password });
-    // console.log('dataAuthForm log', data);
-    // reset();
+    await onLogIn({ email, password });
   };
 
   const handleRegister = async event => {
@@ -62,9 +60,7 @@ export default function AuthForm() {
       return;
     }
 
-    const data = await signUp({ email, password });
-    // console.log('dataAuthForm reg', data);
-    // reset();
+    await signUp({ email, password });
   };
 
   const handleChangeEmail = event => {
@@ -74,11 +70,6 @@ export default function AuthForm() {
   const handleChangePassword = event => {
     setPassword(event.currentTarget.value);
   };
-
-  // const reset = () => {
-  //   setEmail('');
-  //   setPassword('');
-  // };
 
   return (
     <div className={s.form}>
@@ -96,7 +87,6 @@ export default function AuthForm() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* <g clip-path="url(#clip0)"> */}
             <path
               d="M17.8555 7.33402C17.9355 7.33402 18.0004 7.39888 18.0004 7.47889V9C18.0004 9.56932 17.9475 10.126 17.8461 10.666C17.0615 14.8604 13.3662 18.0303 8.9369 17.9998C3.96689 17.9655 -0.0106149 13.9498 0.000388988 8.97972C0.0113226 4.01857 4.03664 0 9.00036 0C11.4322 0 13.6387 0.964758 15.2587 2.53188C15.3172 2.58845 15.3187 2.68168 15.2611 2.7392L13.1092 4.89115C13.0538 4.94656 12.9643 4.948 12.9075 4.89396C11.8907 3.92614 10.5151 3.33197 9.00036 3.33197C5.87247 3.33197 3.3537 5.83284 3.33246 8.96066C3.31112 12.109 5.857 14.668 9.00036 14.668C11.5508 14.668 13.7079 12.9832 14.4192 10.666H9.14523C9.06522 10.666 9.00036 10.6011 9.00036 10.5211V7.47886C9.00036 7.39884 9.06522 7.33398 9.14523 7.33398H17.8555V7.33402Z"
               fill="#2196F3"
@@ -137,8 +127,6 @@ export default function AuthForm() {
               d="M2.91616 11.6768L3.73903 11.1129C3.47645 10.4599 3.33195 9.74676 3.33195 8.99997C3.33195 8.15249 3.51811 7.34808 3.85167 6.62628L3.06259 6.05615C2.55019 6.90219 2.2528 7.89497 2.24556 8.96066C2.23888 9.94342 2.4824 10.8688 2.91616 11.6768Z"
               fill="#FFB300"
             />
-            {/* </g> */}
-            {/* <use href="../img/"></use> */}
           </svg>
           Google
         </Button>

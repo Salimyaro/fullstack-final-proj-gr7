@@ -1,11 +1,11 @@
-import { useEffect, useState, Suspense, lazy, useContext } from 'react';
+import { useEffect, Suspense, lazy, useContext } from 'react';
 import { Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Container from './components/Container';
 import Header from './components/Header';
 import Loader from './components/Loader';
 import AuthContext from './contexts/auth/context';
-
+import { contactsDb } from './components/Contacts/contactsDb';
 import Footer from './components/Footer';
 
 import PrivateRoute from './components/UserMenu/PrivateRoute';
@@ -14,111 +14,48 @@ import PublicRoute from './components/UserMenu/PublicRoute';
 const AuthPageView = lazy(() => import('./views/AuthPageView'));
 const MainPageView = lazy(() => import('./views/MainPageView'));
 const TestView = lazy(() => import('./views/TestView'));
-const ContactsPageView = lazy(() => import('./views/ContactsPageView'));
+const ContactsPageView = lazy(() => import('./components/Contacts'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
 
 export default function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { isLoggedIn, currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
-  console.log(
-    'token app',
-    JSON.parse(window.localStorage.getItem('token-stor')),
-  );
-
-  // useEffect(() => {
-  //   currentUser();
-  //   console.log(
-  //     'token app useEffect',
-  //     JSON.parse(window.localStorage.getItem('token-stor')),
-  //   );
-  // }, [currentUser]);
+  useEffect(() => {
+    currentUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <Header />
       <Container>
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            {/* <AuthPageView /> */}
-            <PublicRoute
-              path="/auth"
-              restricted
-              isLoggedIn={isLoggedIn}
-              redirectTo="/"
-            >
+        <Switch>
+          <Suspense fallback={<Loader />}>
+            <PublicRoute exact path="/auth" redirectTo="/" restricted>
               <AuthPageView />
             </PublicRoute>
-            <PrivateRoute
-              path="/"
-              exact="true"
-              restricted
-              isLoggedIn={isLoggedIn}
-            >
+            <PublicRoute exact path="/contacts">
+              <ContactsPageView items={contactsDb} />
+            </PublicRoute>
+
+            <PrivateRoute exact path="/" redirectTo="/auth">
               <MainPageView />
             </PrivateRoute>
-            <PrivateRoute path="/test" restricted isLoggedIn={isLoggedIn}>
+            <PrivateRoute exact path="/test" redirectTo="/auth">
               <TestView />
             </PrivateRoute>
-            <PrivateRoute path="/results" restricted isLoggedIn={isLoggedIn}>
+            <PrivateRoute exact path="/results" redirectTo="/auth">
               <ResultsView />
             </PrivateRoute>
-            <PrivateRoute
-              path="/useful-info"
-              restricted
-              isLoggedIn={isLoggedIn}
-            >
+            <PrivateRoute exact path="/useful-info" redirectTo="/auth">
               <UsefulInfoView />
             </PrivateRoute>
-            <PublicRoute path="/contacts" restricted>
-              <ContactsPageView />
-            </PublicRoute>
-          </Switch>
-        </Suspense>
+          </Suspense>
+        </Switch>
         <ToastContainer autoClose={3000} />
       </Container>
       <Footer />
     </>
   );
 }
-
-// {
-//   /* <AppBar /> */
-// }
-// {
-//   /* <Switch> */
-// }
-// {
-//   /* <Suspense fallback={<p>Loading...</p>}> */
-// }
-// {
-//   /* <PublicRoute exact path="/">
-//                 <HomeView />
-//               </PublicRoute>
-//               <PublicRoute
-//                 exact
-//                 path="/register"
-//                 redirectTo="/contacts"
-//                 restricted
-//               >
-//                 <RegisterViev />
-//               </PublicRoute>
-//               <PublicRoute
-//                 exact
-//                 path="/login"
-//                 redirectTo="/contacts"
-//                 restricted
-//               >
-//                 <LoginView />
-//               </PublicRoute>
-//               <PrivateRoute exact path="/contacts" redirectTo="/login">
-//                 <ContactsView />
-//               </PrivateRoute> */
-// }
-// {
-//   /* </Suspense> */
-// }
-// {
-//   /* </Switch> */
-// }

@@ -1,24 +1,47 @@
 import AuthForm from '../components/AuthForm';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import '../assets/variables.css';
+
+// const theme = createMuiTheme({
+//   breakpoints: {
+//     values: {
+//       sm: 'var(--mobile)',
+//       md: 'var(--tablet)',
+//       lg: 'var(--desktop)',
+//     },
+//   },
+// });
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 99,
-    marginBottom: 99,
+    marginTop: 39,
+    marginBottom: 50,
+    [theme.breakpoints.up('lg')]: {
+      marginTop: 99,
+      marginBottom: 99,
+    },
+    [theme.breakpoints.between('sm', 'md')]: {
+      marginTop: 80,
+      marginBottom: 70,
+    },
   },
   gridContainer: {
     justifyContent: 'center',
-    direction: 'row',
+    direction: 'column',
     wrap: 'wrap',
+    [theme.breakpoints.down('md')]: {
+      direction: 'row',
+    },
   },
   aboutTest: {
     textAlign: 'start',
-    marginRight: 105,
-    marginTop: 71,
+    [theme.breakpoints.up('lg')]: {
+      marginRight: 105,
+      marginTop: 71,
+    },
   },
   proTest: {
     fontFamily: 'var(--main-font)',
@@ -46,7 +69,7 @@ export default function AuthPageView() {
   return (
     <div className={classes.root}>
       <Grid container className={classes.gridContainer}>
-        <Grid item md={4}>
+        <Grid item>
           <div className={classes.aboutTest}>
             <Typography
               component="h1"
@@ -69,9 +92,6 @@ export default function AuthPageView() {
         <div>
           <AuthForm />
         </div>
-        {/* <Grid item md={4}>
-          
-        </Grid> */}
       </Grid>
     </div>
   );

@@ -9,8 +9,8 @@ export default function NavLinks({ onClick }) {
     <ul className={style.navList}>
       <li>
         <NavLink
-          to="/"
           exact
+          to="/"
           className={style.link}
           activeClassName={style.activeLink}
           onClick={onClick}
@@ -21,7 +21,6 @@ export default function NavLinks({ onClick }) {
       <li>
         <NavLink
           to="/useful-info"
-          exact
           className={style.link}
           activeClassName={style.activeLink}
           onClick={onClick}
@@ -32,7 +31,6 @@ export default function NavLinks({ onClick }) {
       <li>
         <NavLink
           to="/contacts"
-          exact
           className={style.link}
           activeClassName={style.activeLink}
           onClick={onClick}
