@@ -6,6 +6,7 @@ import BondarenkoSvetlana from './img/bondarenko_svetlana295.jpg';
 import TetianaKorobko from './img/Tetiana Korobko295-3.jpg';
 import defaultImg from './img/default4.jpg';
 import Iskra from './img/iskra295-2.jpg';
+import MariaTrishch from './img/fot275.jpg';
 
 export const contactsDb = [
   {
@@ -54,7 +55,7 @@ export const contactsDb = [
     id: 7,
     name: 'Maria Trishch',
     url: 'https://github.com/magrateya',
-    photo: defaultImg,
+    photo: MariaTrishch,
     role: 'Front-End Developer',
   },
   {
