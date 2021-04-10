@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 // import axios from 'axios';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
@@ -19,8 +20,8 @@ export default function AuthForm() {
       toast.error('Please enter email!');
       return;
     }
-
-    const data = await onLogIn({ email, password });
+    return await onLogIn({ email, password });
+    // const data = await onLogIn({ email, password });
     // console.log('dataAuthForm log', data);
     // reset();
   };
@@ -32,8 +33,8 @@ export default function AuthForm() {
       toast.error('Please enter email!');
       return;
     }
-
-    const data = await signUp({ email, password });
+    return await signUp({ email, password });
+    // const data = await signUp({ email, password });
     // console.log('dataAuthForm reg', data);
     // reset();
   };
@@ -57,7 +58,10 @@ export default function AuthForm() {
         You can use your Google Account to authorize:{' '}
       </p>
       <Box>
-        <Button variant="outlined">Google</Button>
+        {/* <Button variant="outlined">Google</Button> */}
+        <a href="https://goit-solo-tests-final-prg.herokuapp.com/auth/google">
+          Google
+        </a>
       </Box>
       <p className={s.login}>Or login to our app using e-mail and password: </p>
       <form>

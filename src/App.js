@@ -5,7 +5,7 @@ import Container from './components/Container';
 import Header from './components/Header';
 import Loader from './components/Loader';
 import AuthContext from './contexts/auth/context';
-import {contactsDb} from './components/Contacts/contactsDb'
+import { contactsDb } from './components/Contacts/contactsDb';
 import Footer from './components/Footer';
 
 import PrivateRoute from './components/UserMenu/PrivateRoute';
@@ -17,6 +17,7 @@ const TestView = lazy(() => import('./views/TestView'));
 const ContactsPageView = lazy(() => import('./components/Contacts'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
+const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
 
 export default function App() {
   const { currentUser } = useContext(AuthContext);
@@ -32,11 +33,14 @@ export default function App() {
       <Container>
         <Switch>
           <Suspense fallback={<Loader />}>
-            <PublicRoute exact path="/auth" redirectTo="/" restricted>
+            <PublicRoute path="/google-auth" redirectTo="/">
+              <GoogleAuth />
+            </PublicRoute>
+            <PublicRoute exact path="/auth" redirectTo="/">
               <AuthPageView />
             </PublicRoute>
             <PublicRoute exact path="/contacts">
-              <ContactsPageView items={contactsDb}/>
+              <ContactsPageView items={contactsDb} />
             </PublicRoute>
 
             <PrivateRoute exact path="/" redirectTo="/auth">

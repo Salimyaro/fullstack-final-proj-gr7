@@ -4,12 +4,11 @@ import AuthContext from '../../contexts/auth/context';
 
 export default function PublicRoute({
   children,
-  restricted = false,
   redirectTo = '/',
   ...routeProps
 }) {
   const { isLoggedIn } = useContext(AuthContext);
-  const shouldRedirect = isLoggedIn && restricted;
+  const shouldRedirect = isLoggedIn;
   return (
     <Route {...routeProps}>
       {shouldRedirect ? <Redirect to={redirectTo} /> : children}

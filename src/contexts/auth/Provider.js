@@ -27,11 +27,10 @@ export default function Provider({ children }) {
 
   const onLogIn = async user => {
     const { data } = await axios.post('/auth/login', user);
-    // console.log(data.data);
-    setUser(data.data);
-    setIsLoggedIn(true);
     token.set(data.data.token);
     window.localStorage.setItem('token-stor', JSON.stringify(data.data.token));
+    setIsLoggedIn(true);
+    setUser(data.data);
     return data;
   };
 
@@ -50,15 +49,28 @@ export default function Provider({ children }) {
     }
     token.set(JSON.parse(window.localStorage.getItem('token-stor')));
     const { data } = await axios.get('/user');
-    setUser(data.data);
     setIsLoggedIn(true);
-    // console.log('currentUser data.data', data.data);
-    // console.log('currentUser data', data);
+    setUser(data.data);
+
+    // console.log('Provider currentUser data.data', data.data);
+    // console.log('Provider currentUser data', data);
     return data;
   };
 
+  const onGoogleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
   const providerValue = useMemo(() => {
-    return { user, isLoggedIn, onLogIn, onLogOut, signUp, currentUser };
+    return {
+      user,
+      isLoggedIn,
+      onLogIn,
+      onLogOut,
+      signUp,
+      currentUser,
+      onGoogleLogin,
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn, user]);
 
