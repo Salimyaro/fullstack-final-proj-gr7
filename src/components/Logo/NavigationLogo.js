@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css';
-import Logo from '../../img/logo.png';
+import Logo from '../../img/logo.svg';
 
-const Navigation = () => {
+const NavigationLogo = () => {
   return (
     <nav>
       <NavLink to="/" exact className={s.link} activeClassName={s.activeLink}>
@@ -13,4 +13,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default NavigationLogo;
