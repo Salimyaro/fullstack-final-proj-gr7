@@ -4,7 +4,7 @@ import AuthContext from '../../contexts/auth/context';
 
 export default function PrivateRoute({
   children,
-  redirectTo = '/auth',
+  redirectTo = '/',
   ...routeProps
 }) {
   const { isLoggedIn } = useContext(AuthContext);
