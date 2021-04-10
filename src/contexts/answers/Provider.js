@@ -26,8 +26,6 @@ const AnswersProvider = ({ children }) => {
     }
   };
 
-  console.log(userAnswers);
-
   return (
     <AnswersContext.Provider
       value={{

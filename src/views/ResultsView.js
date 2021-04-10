@@ -24,7 +24,9 @@ export default function Results() {
     // eslint-disable-next-line
   }, []);
 
-  const correctAnswers = Math.floor((12 * results.data.result) / 100);
+  const correctAnswers = results
+    ? Math.floor((12 * results.data.result) / 100)
+    : null;
 
   return (
     results && (
