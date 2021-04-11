@@ -1,8 +1,9 @@
 .container {
-  max-width: 1440px;
+  flex: 1;
+  /* max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
-  padding-right: 15px;
-  min-height: calc(100vh - 71px - 56px);
+  padding-right: 15px; */
+  /* min-height: calc(100vh - 71px - 56px); */
 }
