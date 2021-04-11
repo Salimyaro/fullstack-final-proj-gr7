@@ -4,7 +4,8 @@ import { useState, useEffect, useContext } from 'react';
 import AnswersContext from '../contexts/answers/context';
 import AuthContext from '../contexts/auth/context';
 
-import Diagram from '../demo-components/Diagram';
+// import Diagram from '../demo-components/Diagram';
+import ResultsChart from '../demo-components/PieChart';
 import s from './ResultsView.module.css';
 
 export default function Results() {
@@ -34,7 +35,10 @@ export default function Results() {
         <h2 className={s.heading}>Results</h2>
         <p className={s.testTitle}>[{testingLabel.toUpperCase()}_]</p>
         <div className={s.lineBreak}></div>
-        <Diagram rightAnswers={92} wrongAnswers={8} />
+        <ResultsChart
+          correctAnswers={results.data.result}
+          incorrectAnswers={100 - results.data.result}
+        />
         <div className={s.resultsBar}>
           <span>
             Correct answers - <b>{correctAnswers}</b>
