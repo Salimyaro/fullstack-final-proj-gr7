@@ -32,10 +32,16 @@ export default function AuthForm() {
   const handleLogin = async event => {
     event.preventDefault();
 
-    if (event.target.value === '') {
-      toast.error('Please enter email!');
+    if (email.trim() === '' || password.trim() === '') {
+      toast.error('Please fill in the password and email fields!', {
+        autoClose: 2000,
+      });
       return;
     }
+    // if (event.target.value === '') {
+    //   toast.error('Please enter email!');
+    //   return;
+    // }
 
     return await onLogIn({ email, password });
     // const data = await onLogIn({ email, password });
@@ -46,10 +52,16 @@ export default function AuthForm() {
   const handleRegister = async event => {
     event.preventDefault();
 
-    if (email.trim() === '') {
-      toast.error('Please enter email!');
+    if (email.trim() === '' || password.trim() === '') {
+      toast.error('Please fill in the password and email fields!', {
+        autoClose: 2000,
+      });
       return;
     }
+    // if (email.trim() === '') {
+    //   toast.error('Please enter email!');
+    //   return;
+    // }
 
     return await signUp({ email, password });
     // const data = await signUp({ email, password });
@@ -67,9 +79,7 @@ export default function AuthForm() {
 
   return (
     <div className={s.form}>
-      <p className={s.account}>
-        You can use your Google Account to authorize:{' '}
-      </p>
+      <p className={s.account}>You can use your Google Account to authorize:</p>
       <div className={s.buttonGoogle}>
         <a
           href="https://goit-solo-tests-final-prg.herokuapp.com/auth/google"
