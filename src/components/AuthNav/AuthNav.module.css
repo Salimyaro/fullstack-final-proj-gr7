@@ -15,11 +15,11 @@
   display: flex;
 }
 .link {
-  margin-right: 40px;
+  margin-right: 65px;
 }
 
 .navList li:last-child .link {
-  margin-right: 15px;
+  margin-right: 25px;
 }
 
 @media (max-width: 767px) {
