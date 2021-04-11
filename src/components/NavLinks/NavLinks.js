@@ -7,6 +7,7 @@ export default function NavLinks({ onClick }) {
     <ul className={style.navList}>
       <li>
         <NavLink
+          exact
           to="/"
           className={style.link}
           activeClassName={style.activeLink}

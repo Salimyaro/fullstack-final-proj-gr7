@@ -14,7 +14,7 @@ import {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f6fb',
     boxShadow: 'none',
     borderBottom: '1px solid #E2E3E5',
   },

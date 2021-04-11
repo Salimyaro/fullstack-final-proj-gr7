@@ -38,6 +38,7 @@ export default function App() {
             </PublicRoute>
             <PublicRoute exact path="/auth" redirectTo="/" restricted>
               <AuthPageView />
+              <ToastContainer autoClose={3000} />
             </PublicRoute>
             <PublicRoute exact path="/contacts">
               <ContactsPageView items={contactsDb} />
@@ -57,7 +58,7 @@ export default function App() {
             </PrivateRoute>
           </Suspense>
         </Switch>
-        <ToastContainer autoClose={3000} />
+        {/* <ToastContainer autoClose={3000} /> */}
       </Container>
       <Footer />
     </>
