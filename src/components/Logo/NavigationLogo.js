@@ -6,7 +6,7 @@ import Logo from '../../img/logo.svg';
 const NavigationLogo = () => {
   return (
     <nav>
-      <NavLink to="/" exact className={s.link} activeClassName={s.activeLink}>
+      <NavLink to="/" className={s.link} activeClassName={s.activeLink}>
         <img src={Logo} alt="logo" />
       </NavLink>
     </nav>
