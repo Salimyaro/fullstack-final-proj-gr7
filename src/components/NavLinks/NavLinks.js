@@ -1,15 +1,12 @@
 import { NavLink } from 'react-router-dom';
-// import { useState } from 'react';
+
 import style from '../AuthNav/AuthNav.module.css';
 
 export default function NavLinks({ onClick }) {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const toggleModal = () => setIsModalOpen(state => !state);
   return (
     <ul className={style.navList}>
       <li>
         <NavLink
-          exact
           to="/"
           className={style.link}
           activeClassName={style.activeLink}

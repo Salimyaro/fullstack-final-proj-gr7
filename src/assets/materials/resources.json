@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "url": "http://dou.ua",
+    "description": "DOU"
+  },
+  {
+    "id": 2,
+    "url": "https://habr.com",
+    "description": "Habr"
+  },
+  {
+    "id": 3,
+    "url": "http://www.softwareqatest.com/",
+    "description": "SoftwareQATest"
+  },
+  {
+    "id": 4,
+    "url": "https://goit.ua",
+    "description": "GoIt"
+  }
+]

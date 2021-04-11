@@ -63,6 +63,7 @@ p {
 }
 .contactPhoto {
   width: 100%;
+  height: auto;
   /* border-radius: 4px; */
   /* width: 295px; */
 }

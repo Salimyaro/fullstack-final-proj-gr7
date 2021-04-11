@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Testing dot.com",
+    "author": "Roman Savin",
+    "url": "https://www.quality-assurance-group.com/book/testirovanie-dot-com/"
+  },
+  {
+    "id": 2,
+    "name": "A mental hospital in the hands of patients",
+    "author": "Alan Cooper",
+    "url": "https://mralancooper.medium.com/"
+  },
+  {
+    "id": 3,
+    "name": "Scrum",
+    "author": "Jeff Sutherland",
+    "url": "https://scrumguides.org/jeff.html"
+  }
+]

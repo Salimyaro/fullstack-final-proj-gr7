@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import Navigation from '../Navigation';
+import NavigationLogo from '../Logo';
 import UserMenu from '../UserMenu';
 import AuthNav from '../AuthNav';
 import AuthContext from '../../contexts/auth/context';
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: '#fff',
     boxShadow: 'none',
-    borderBottom: '1px solid #ccc',
+    borderBottom: '1px solid #E2E3E5',
   },
   wrapper: {
     paddingLeft: '20px',
@@ -27,16 +27,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function AppBar() {
   const classes = useStyles();
-  // const [isLoggedIn, setisLoggedIn] = useState(true);
+
   const { isLoggedIn } = useContext(AuthContext);
-  // console.log('heder isLoggedIn:', isLoggedIn);
 
   return (
     <MuiAppBar position="static" className={classes.root}>
       <Toolbar className={classes.wrapper}>
         <Grid container alignItems="center" justify="space-between">
           <Grid item>
-            <Navigation />
+            <NavigationLogo />
           </Grid>
           <Grid item sm></Grid>
           <Grid item>{isLoggedIn ? <UserMenu /> : <AuthNav />}</Grid>

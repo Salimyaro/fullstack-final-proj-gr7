@@ -49,14 +49,14 @@ export default function Test() {
   }
 
   const submitAnswers = () => {
-    history.push('/results');
+    history.push(`/results?type=${testType}`);
   };
 
   return (
     <div className={s.buttonContainer}>
       <div className={s.finishContainer}>
         <p className={s.title}>[ {testingLabel}&#95; ]</p>
-        <Link to="/" exact>
+        <Link to="/">
           <button className={s.buttonFinish} onClick={reset}>
             <span className={s.buttonName}>Cancel test</span>
           </button>
