@@ -33,22 +33,11 @@ export default function App() {
       <Container>
         <Switch>
           <Suspense fallback={<Loader />}>
-            <PublicRoute exact path="/google-auth" redirectTo="/" restricted>
+            <PublicRoute exact path="/google-auth" redirectTo="/">
               <GoogleAuth />
             </PublicRoute>
             <PublicRoute exact path="/auth" redirectTo="/" restricted>
               <AuthPageView />
-              <ToastContainer
-                position="bottom-center"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-              />
             </PublicRoute>
             <PublicRoute exact path="/contacts">
               <ContactsPageView items={contactsDb} />
@@ -68,7 +57,18 @@ export default function App() {
             </PrivateRoute>
           </Suspense>
         </Switch>
-        {/* <ToastContainer autoClose={3000} /> */}
+        <ToastContainer autoClose={3000} />
+        {/* <ToastContainer
+                position="bottom-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              /> */}
       </Container>
       <Footer />
     </>

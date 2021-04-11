@@ -4,7 +4,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   console.log('state user:', user);
   console.log('state isLoggedIn:', isLoggedIn);
 
@@ -50,6 +50,7 @@ export default function Provider({ children }) {
 
   const currentUser = async () => {
     if (!JSON.parse(window.localStorage.getItem('token-stor'))) {
+      setIsLoggedIn(false);
       return;
     }
     token.set(JSON.parse(window.localStorage.getItem('token-stor')));
