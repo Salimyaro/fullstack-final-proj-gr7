@@ -48,6 +48,10 @@
   padding-left: 5px;
 }
 
+.itemLink {
+  color: var(--primary-color-text);
+}
+
 .book {
   text-decoration: none;
 }
@@ -71,21 +75,25 @@
     width: 200px;
   }
 
+  .usefulInfo:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
   .title {
     font-size: 18px;
     line-height: 22px;
-    margin-bottom: 38px;
+    margin-bottom: 26px;
     width: 120px;
   }
 
   .title::after {
     width: 150px;
-    top: 70px;
+    top: 55px;
   }
 
   .list {
     font-size: 10px;
     line-height: 16px;
-    margin-left: 0px;
+    margin-left: 10px;
   }
 }
