@@ -8,6 +8,7 @@ export default function Questions({
   answers,
   onAnswerChange,
   questionId,
+  defaultValue,
 }) {
   const [value, setValue] = useState('');
 
@@ -17,8 +18,12 @@ export default function Questions({
   };
 
   useEffect(() => {
-    setValue('');
-  }, [questionId]);
+    if (defaultValue) {
+      setValue(defaultValue);
+    } else {
+      setValue('');
+    }
+  }, [questionId, defaultValue]);
 
   return (
     <form className={s.questionsContainer}>
