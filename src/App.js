@@ -17,6 +17,7 @@ const TestView = lazy(() => import('./views/TestView'));
 const ContactsPageView = lazy(() => import('./components/Contacts'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
+const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
 
 export default function App() {
   const { currentUser } = useContext(AuthContext);
@@ -32,6 +33,9 @@ export default function App() {
       <Container>
         <Switch>
           <Suspense fallback={<Loader />}>
+            <PublicRoute exact path="/google-auth" redirectTo="/" restricted>
+              <GoogleAuth />
+            </PublicRoute>
             <PublicRoute exact path="/auth" redirectTo="/" restricted>
               <AuthPageView />
             </PublicRoute>

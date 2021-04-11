@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+// import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
@@ -7,49 +8,39 @@ import AuthContext from '../../contexts/auth/context';
 import { makeStyles } from '@material-ui/core/styles';
 import '../../assets/variables.css';
 
-const useStyles = makeStyles(theme => ({
-  buttonGoogle: {
-    width: 159,
-    height: 51,
-    fontSize: 14,
-    fontWeight: 'var(--bold)',
-    padding: '17px 37px 16px 38px',
-    border: 'none',
-    filter: 'drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.1))',
-    backgroundColor: '#FAFAFA',
-    textTransform: 'capitalize',
-    boderRadius: 0,
-  },
-  sign: {
-    width: 201,
-    height: 60,
-    padding: '25px 46px 21px 38px',
-    fontSize: 12,
-    color: 'var(--primary-color-text)',
-    border: '1px solid #CED2D1',
+// const useStyles = makeStyles(theme => ({
+//   sign: {
+//     width: 201,
+//     height: 60,
+//     padding: '25px 46px 21px 38px',
+//     fontSize: 12,
+//     color: 'var(--primary-color-text)',
+//     border: '1px solid #CED2D1',
 
-    '&:hover, &:focus': {
-      backgroundColor: 'var(--active-component-color)',
-      color: 'var(--white-color)',
-    },
-  },
-}));
+//     '&:hover, &:focus': {
+//       backgroundColor: 'var(--active-component-color)',
+//       color: 'var(--white-color)',
+//     },
+//   },
+// }));
 
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { onLogIn, signUp } = useContext(AuthContext);
-  const classes = useStyles();
 
   const handleLogin = async event => {
     event.preventDefault();
 
-    if (email.trim() === '') {
+    if (event.target.value === '') {
       toast.error('Please enter email!');
       return;
     }
 
-    await onLogIn({ email, password });
+    return await onLogIn({ email, password });
+    // const data = await onLogIn({ email, password });
+    // console.log('dataAuthForm log', data);
+    // reset();
   };
 
   const handleRegister = async event => {
@@ -60,7 +51,10 @@ export default function AuthForm() {
       return;
     }
 
-    await signUp({ email, password });
+    return await signUp({ email, password });
+    // const data = await signUp({ email, password });
+    // console.log('dataAuthForm reg', data);
+    // reset();
   };
 
   const handleChangeEmail = event => {
@@ -76,8 +70,11 @@ export default function AuthForm() {
       <p className={s.account}>
         You can use your Google Account to authorize:{' '}
       </p>
-      <Box style={{ textAlign: 'start' }}>
-        <Button variant="outlined" className={classes.buttonGoogle}>
+      <div className={s.buttonGoogle}>
+        <a
+          href="https://goit-solo-tests-final-prg.herokuapp.com/auth/google"
+          className={s.authGoogle}
+        >
           <svg
             className={s.icon}
             width="18"
@@ -129,53 +126,44 @@ export default function AuthForm() {
             />
           </svg>
           Google
-        </Button>
-      </Box>
+        </a>
+      </div>
       <p className={s.login}>Or login to our app using e-mail and password: </p>
       <form>
-        <label>
-          <input
-            className={s.input}
-            type="email"
-            name="email"
-            value={email}
-            placeholder="E-mail"
-            onChange={handleChangeEmail}
-            required
-          />
-        </label>
-        <label>
-          <input
-            className={s.input}
-            type="text"
-            name="password"
-            value={password}
-            placeholder="Password"
-            onChange={handleChangePassword}
-            required
-            autoComplete="off"
-          />
-        </label>
+        <div className={s.formInput}>
+          <label>
+            <input
+              className={s.input}
+              type="email"
+              name="email"
+              value={email}
+              placeholder="E-mail"
+              onChange={handleChangeEmail}
+              required
+            />
+          </label>
+          <label>
+            <input
+              className={s.input}
+              type="text"
+              name="password"
+              value={password}
+              placeholder="Password"
+              onChange={handleChangePassword}
+              required
+              autoComplete="off"
+            />
+          </label>
+        </div>
 
-        <Box>
-          <Button
-            style={{ marginRight: 20 }}
-            onClick={handleLogin}
-            variant="outlined"
-            type="submit"
-            className={classes.sign}
-          >
+        <div>
+          <button onClick={handleLogin} type="submit" className={s.sign}>
             Sign in
-          </Button>
-          <Button
-            onClick={handleRegister}
-            variant="outlined"
-            type="submit"
-            className={classes.sign}
-          >
+          </button>
+          <button onClick={handleRegister} type="submit" className={s.sign}>
             Sign up
-          </Button>
-        </Box>
+          </button>
+        </div>
       </form>
     </div>
   );
