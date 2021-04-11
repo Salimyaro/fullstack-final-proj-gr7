@@ -32,6 +32,11 @@
   height: 70px;
   background-color: var(--header-lines);
 }
+.userName {
+  max-width: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 /* .sandw {
   position: relative;
   border: none;

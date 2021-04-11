@@ -7,6 +7,7 @@ import s from './AuthForm.module.css';
 import AuthContext from '../../contexts/auth/context';
 import { makeStyles } from '@material-ui/core/styles';
 import '../../assets/variables.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // const useStyles = makeStyles(theme => ({
 //   sign: {
@@ -33,8 +34,14 @@ export default function AuthForm() {
     event.preventDefault();
 
     if (email.trim() === '' || password.trim() === '') {
-      toast.error('Please fill in the password and email fields!', {
-        autoClose: 2000,
+      toast.error('Please fill in the fields!', {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
       return;
     }
@@ -53,8 +60,14 @@ export default function AuthForm() {
     event.preventDefault();
 
     if (email.trim() === '' || password.trim() === '') {
-      toast.error('Please fill in the password and email fields!', {
-        autoClose: 2000,
+      toast.error('Please fill in the fields!', {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
       return;
     }
