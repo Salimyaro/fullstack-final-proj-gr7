@@ -49,7 +49,7 @@ export default function Test() {
   }
 
   const submitAnswers = () => {
-    history.push('/results');
+    history.push(`/results?type=${testType}`);
   };
 
   return (

@@ -43,6 +43,11 @@ export default function Provider({ children }) {
     return data;
   };
 
+  const fetchResults = async (answers, testType) => {
+    const { data } = await axios.post(`/results/${testType}`, answers);
+    return data;
+  };
+
   const currentUser = async () => {
     if (!JSON.parse(window.localStorage.getItem('token-stor'))) {
       return;
@@ -70,6 +75,7 @@ export default function Provider({ children }) {
       signUp,
       currentUser,
       onGoogleLogin,
+      fetchResults,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn, user]);
