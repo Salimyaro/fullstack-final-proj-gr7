@@ -33,7 +33,7 @@ export default function AuthForm() {
   const handleLogin = async event => {
     event.preventDefault();
 
-    if (email.trim() !== /\S+@\S+\.\S+/ || password.trim().length < 6) {
+    if (!email.match(/\S+@\S+\.\S+/) || password.trim().length < 6) {
       toast.error(
         'E-mail must be valid and the password must be longer than 5 characters!',
         {
@@ -55,7 +55,7 @@ export default function AuthForm() {
   const handleRegister = async event => {
     event.preventDefault();
 
-    if (email.trim() !== /\S+@\S+\.\S+/ || password.trim().length < 6) {
+    if (!email.match(/\S+@\S+\.\S+/) || password.trim().length < 6) {
       toast.error(
         'E-mail must be valid and the password must be longer than 5 characters!',
         {
