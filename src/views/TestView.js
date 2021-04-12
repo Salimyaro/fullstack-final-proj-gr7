@@ -87,7 +87,11 @@ export default function Test() {
           </button>
         )}
         {activeQuestionId === 11 ? (
-          <button className={s.nextButton} onClick={submitAnswers}>
+          <button
+            disabled={!isUserAnsvered}
+            className={s.nextButton}
+            onClick={submitAnswers}
+          >
             <span className={s.submitName}>Submit</span>
           </button>
         ) : (
