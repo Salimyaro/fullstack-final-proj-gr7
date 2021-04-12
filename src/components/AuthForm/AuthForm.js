@@ -33,9 +33,9 @@ export default function AuthForm() {
   const handleLogin = async event => {
     event.preventDefault();
 
-    if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 4) {
+    if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
       toast.error(
-        'E-mail must be valid and the password must be longer than 4 characters!',
+        'E-mail must be valid and the password must be longer than 5 characters!',
         {
           position: 'top-right',
           autoClose: 5000,
@@ -55,9 +55,9 @@ export default function AuthForm() {
   const handleRegister = async event => {
     event.preventDefault();
 
-    if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 4) {
+    if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
       toast.error(
-        'E-mail must be valid and the password must be longer than 4 characters!',
+        'E-mail must be valid and the password must be longer than 5 characters!',
         {
           position: 'top-right',
           autoClose: 5000,
