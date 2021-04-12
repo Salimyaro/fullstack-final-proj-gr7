@@ -1,8 +1,8 @@
-import { useEffect, useContext } from 'react';
+import axios from 'axios';
+import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../contexts/auth/context';
 
-import axios from 'axios';
 axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 
 export default function GoogleAuth() {
@@ -13,7 +13,6 @@ export default function GoogleAuth() {
   useEffect(() => {
     const params = new URL(document.location).searchParams;
     const token = params.get('token');
-    console.log('token', token);
     window.localStorage.setItem('token-stor', JSON.stringify(token));
     onGoogleLogin();
     currentUser();

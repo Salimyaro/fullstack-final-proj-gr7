@@ -1,11 +1,9 @@
-import cat from '../img/cat.png';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import ResultsChart from '../components/PieChart';
 import AnswersContext from '../contexts/answers/context';
 import AuthContext from '../contexts/auth/context';
-
-// import Diagram from '../demo-components/Diagram';
-import ResultsChart from '../demo-components/PieChart';
+import cat from '../img/cat.png';
 import s from './ResultsView.module.css';
 
 export default function Results() {

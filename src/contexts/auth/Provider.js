@@ -1,12 +1,12 @@
-import { useState, useMemo } from 'react';
-import authContext from './context';
 import axios from 'axios';
+import { useMemo, useState } from 'react';
+import authContext from './context';
+
 axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
+
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  console.log('state user:', user);
-  console.log('state isLoggedIn:', isLoggedIn);
 
   const token = {
     set(token) {
@@ -57,9 +57,6 @@ export default function Provider({ children }) {
     const { data } = await axios.get('/user');
     setIsLoggedIn(true);
     setUser(data.data);
-
-    // console.log('Provider currentUser data.data', data.data);
-    // console.log('Provider currentUser data', data);
     return data;
   };
 
@@ -80,8 +77,6 @@ export default function Provider({ children }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn, user]);
-
-  console.log('providerValue', providerValue);
 
   return (
     <authContext.Provider value={providerValue}>

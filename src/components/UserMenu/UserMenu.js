@@ -1,12 +1,12 @@
-import { useState, useContext } from 'react';
-import s from './UserMenu.module.css';
-import styles from '../AuthNav/AuthMobile.module.css';
-import LogOutImg from '../../img/sign-out.png';
+import { useContext, useState } from 'react';
+import AuthContext from '../../contexts/auth/context';
 import DefaultAvatar from '../../img/default-avatar.jpg';
-import SandwBtn from '../SandwBtn';
+import LogOutImg from '../../img/sign-out.png';
+import styles from '../AuthNav/AuthMobile.module.css';
 import Modal from '../Modal';
 import NavLinks from '../NavLinks';
-import AuthContext from '../../contexts/auth/context';
+import SandwBtn from '../SandwBtn';
+import s from './UserMenu.module.css';
 
 export default function UserMenu() {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -37,23 +37,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
-/* .sandw {
-  position: relative;
-  border: none;
-  background: transparent;
-  padding: 0;
-  margin-left: 20px;
-}
-.sandw::before {
-  position: absolute;
-  left: -20px;
-  top: -140%;
-  content: '';
-  display: block;
-  width: 1px;
-  height: 70px;
-  background-color: #ccc;
-} */
+
 @media (max-width: 767px) {
   .navigationDesc,
   .userName,

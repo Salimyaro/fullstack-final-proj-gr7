@@ -3,7 +3,6 @@ axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 
 export async function login(user) {
   const { data } = await axios.post('/auth/login', user);
-  // console.log(data);
   return data;
 }
 

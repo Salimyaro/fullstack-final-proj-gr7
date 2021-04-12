@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import AuthContext from '../../contexts/auth/context';
 
 export default function PublicRoute({

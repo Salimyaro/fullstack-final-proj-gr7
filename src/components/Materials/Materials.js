@@ -1,6 +1,5 @@
 import books from '../../assets/materials/literature.json';
 import resources from '../../assets/materials/resources.json';
-
 import s from './Materials.module.css';
 
 export default function Materials() {

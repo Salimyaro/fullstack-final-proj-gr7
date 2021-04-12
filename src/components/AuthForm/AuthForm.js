@@ -1,29 +1,9 @@
-import { useState, useContext } from 'react';
-// import { NavLink } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
-// import Button from '@material-ui/core/Button';
-// import { Box } from '@material-ui/core';
-import s from './AuthForm.module.css';
-import AuthContext from '../../contexts/auth/context';
-// import { makeStyles } from '@material-ui/core/styles';
-import '../../assets/variables.css';
 import 'react-toastify/dist/ReactToastify.css';
-
-// const useStyles = makeStyles(theme => ({
-//   sign: {
-//     width: 201,
-//     height: 60,
-//     padding: '25px 46px 21px 38px',
-//     fontSize: 12,
-//     color: 'var(--primary-color-text)',
-//     border: '1px solid #CED2D1',
-
-//     '&:hover, &:focus': {
-//       backgroundColor: 'var(--active-component-color)',
-//       color: 'var(--white-color)',
-//     },
-//   },
-// }));
+import '../../assets/variables.css';
+import AuthContext from '../../contexts/auth/context';
+import s from './AuthForm.module.css';
 
 export default function AuthForm() {
   const [email, setEmail] = useState('');
@@ -32,7 +12,6 @@ export default function AuthForm() {
 
   const handleLogin = async event => {
     event.preventDefault();
-
     if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
       toast.error(
         'E-mail must be valid and the password must be longer than 5 characters!',
@@ -48,13 +27,11 @@ export default function AuthForm() {
       );
       return;
     }
-
     return await onLogIn({ email, password });
   };
 
   const handleRegister = async event => {
     event.preventDefault();
-
     if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
       toast.error(
         'E-mail must be valid and the password must be longer than 5 characters!',
@@ -70,7 +47,6 @@ export default function AuthForm() {
       );
       return;
     }
-
     return await signUp({ email, password });
   };
 
@@ -170,7 +146,6 @@ export default function AuthForm() {
             />
           </label>
         </div>
-
         <div>
           <button onClick={handleLogin} type="submit" className={s.sign}>
             Sign in

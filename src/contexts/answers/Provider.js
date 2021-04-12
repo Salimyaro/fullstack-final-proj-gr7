@@ -1,5 +1,5 @@
-import AnswersContext from './context';
 import { useState } from 'react';
+import AnswersContext from './context';
 
 const AnswersProvider = ({ children }) => {
   const [userAnswers, setUserAnswers] = useState([]);

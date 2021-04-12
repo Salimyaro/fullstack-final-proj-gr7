@@ -1,6 +1,6 @@
 import React from 'react';
-import s from './TestMenu.module.css';
 import { Link } from 'react-router-dom';
+import s from './TestMenu.module.css';
 
 export default function TestMenu() {
   return (

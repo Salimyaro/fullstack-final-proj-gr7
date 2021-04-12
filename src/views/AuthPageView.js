@@ -1,55 +1,6 @@
-import AuthForm from '../components/AuthForm';
 import '../assets/variables.css';
+import AuthForm from '../components/AuthForm';
 import s from './AuthView.module.css';
-
-// const useStyles = makeStyles(theme => ({
-//   // root: {
-//   //   flexGrow: 1,
-//   //   marginTop: 39,
-//   //   marginBottom: 50,
-//   //   [theme.breakpoints.up('lg')]: {
-//   //     marginTop: 99,
-//   //     marginBottom: 99,
-//   //   },
-//   //   [theme.breakpoints.between('sm', 'md')]: {
-//   //     marginTop: 80,
-//   //     marginBottom: 70,
-//   //   },
-//   // },
-//   // gridContainer: {
-//   //   justifyContent: 'center',
-//   //   direction: 'column',
-//   //   wrap: 'wrap',
-//   //   [theme.breakpoints.up('sm')]: {
-//   //     direction: 'row',
-//   //   },
-//   // },
-//   // aboutTest: {
-//   //   textAlign: 'start',
-//   //   [theme.breakpoints.up('lg')]: {
-//   //     marginRight: 105,
-//   //     marginTop: 71,
-//   //   },
-//   // },
-//   // proTest: {
-//   //   fontFamily: 'var(--main-font)',
-//   //   fontWeight: 'var(--extra-bold)',
-//   //   fontSize: 34,
-//   // },
-//   // paragraph: {
-//   //   width: 420,
-//   //   fontFamily: 'var(--main-font)',
-//   //   fontWeight: 'var(--medium)',
-//   //   fontSize: 18,
-//   //   lineHeight: 2,
-//   //   color: 'var(--secondary-color-text)',
-//   //   letterSpacing: 0.32,
-//   // },
-//   // span: {
-//   //   fontWeight: 'var(--extra-bold)',
-//   //   color: 'var(--primary-color-text)',
-//   // },
-// }));
 
 export default function AuthPageView() {
   return (

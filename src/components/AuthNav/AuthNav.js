@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import s from './AuthNav.module.css';
-import styles from './AuthMobile.module.css';
-import SandwBtn from '../SandwBtn';
 import Modal from '../Modal';
+import SandwBtn from '../SandwBtn';
+import styles from './AuthMobile.module.css';
+import s from './AuthNav.module.css';
 
 export default function AuthNav() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +19,6 @@ export default function AuthNav() {
           Contacts
         </NavLink>
       </div>
-
       <SandwBtn isModalOpen={isModalOpen} onClick={toggleModal} />
       {isModalOpen && (
         <Modal onClose={toggleModal}>

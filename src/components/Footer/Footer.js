@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import copyright from '../../img/copyright.svg';
 import heart from '../../img/heart.svg';
-
 import s from './Footer.module.css';
 
 export default function Footer() {

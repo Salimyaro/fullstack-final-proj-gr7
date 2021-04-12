@@ -1,23 +1,22 @@
-import { useEffect, Suspense, lazy, useContext } from 'react';
+import { lazy, Suspense, useContext, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { contactsDb } from './components/Contacts/contactsDb';
 import Container from './components/Container';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import Loader from './components/Loader';
-import AuthContext from './contexts/auth/context';
-import { contactsDb } from './components/Contacts/contactsDb';
-import Footer from './components/Footer';
-
 import PrivateRoute from './components/UserMenu/PrivateRoute';
 import PublicRoute from './components/UserMenu/PublicRoute';
+import AuthContext from './contexts/auth/context';
 
 const AuthPageView = lazy(() => import('./views/AuthPageView'));
 const MainPageView = lazy(() => import('./views/MainPageView'));
 const TestView = lazy(() => import('./views/TestView'));
-const ContactsPageView = lazy(() => import('./components/Contacts'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
 const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
+const ContactsPageView = lazy(() => import('./components/Contacts'));
 
 export default function App() {
   const { currentUser } = useContext(AuthContext);

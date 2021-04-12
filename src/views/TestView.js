@@ -1,11 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Questions from '../components/Questions';
-import s from './TestView.module.css';
-import { getTest } from '../service/user-api';
-import arrowbr from '../img/arrow-br.svg';
-import arrowbl from '../img/arrow-bl.svg';
 import AnswersContext from '../contexts/answers/context';
+import arrowbl from '../img/arrow-bl.svg';
+import arrowbr from '../img/arrow-br.svg';
+import { getTest } from '../service/user-api';
+import s from './TestView.module.css';
 
 export default function Test() {
   const { userAnswers, setUserAnswers, handleAnswerTest } = useContext(
@@ -87,7 +87,11 @@ export default function Test() {
           </button>
         )}
         {activeQuestionId === 11 ? (
-          <button className={s.nextButton} onClick={submitAnswers}>
+          <button
+            disabled={!isUserAnsvered}
+            className={s.nextButton}
+            onClick={submitAnswers}
+          >
             <span className={s.submitName}>Submit</span>
           </button>
         ) : (
