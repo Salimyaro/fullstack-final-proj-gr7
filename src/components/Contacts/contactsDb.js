@@ -1,12 +1,11 @@
-import AslanovRustam from './img/AslanovRustam280.jpg';
-import SalimovYaroslav from './img/salimov_yaroslav280.jpg';
 import AnnaBychkova from './img/Anna Bychkova295.jpg';
-import SolomkaVitaliy from './img/solomka_vitaliy280.jpg';
+import AslanovRustam from './img/AslanovRustam280.jpg';
 import BondarenkoSvetlana from './img/bondarenko_svetlana280.jpg';
-import TetianaKorobko from './img/Tetiana Korobko280.jpg';
-import defaultImg from './img/default4.jpg';
-import Iskra from './img/iskra295-2.jpg';
 import MariaTrishch from './img/fot280.jpg';
+import Iskra from './img/iskra295-2.jpg';
+import SalimovYaroslav from './img/salimov_yaroslav280.jpg';
+import SolomkaVitaliy from './img/solomka_vitaliy280.jpg';
+import TetianaKorobko from './img/Tetiana Korobko280.jpg';
 import Tsotsko from './img/Tsotsko280.jpg';
 
 export const contactsDb = [

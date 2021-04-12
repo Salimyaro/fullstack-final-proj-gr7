@@ -1,6 +1,5 @@
 import React from 'react';
 import Materials from '../components/Materials/Materials';
-
 import s from './UsefulInfoView.module.css';
 
 export default function UsefulInfoView() {

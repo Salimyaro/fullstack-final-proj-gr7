@@ -1,18 +1,16 @@
-import { useContext } from 'react';
-import NavigationLogo from '../Logo';
-import UserMenu from '../UserMenu';
-import AuthNav from '../AuthNav';
-import AuthContext from '../../contexts/auth/context';
-
-import React from 'react';
 import {
   AppBar as MuiAppBar,
-  Toolbar,
   Grid,
   makeStyles,
+  Toolbar,
 } from '@material-ui/core';
+import React, { useContext } from 'react';
+import AuthContext from '../../contexts/auth/context';
+import AuthNav from '../AuthNav';
+import NavigationLogo from '../Logo';
+import UserMenu from '../UserMenu';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(_theme => ({
   root: {
     backgroundColor: '#f5f6fb',
     boxShadow: 'none',
