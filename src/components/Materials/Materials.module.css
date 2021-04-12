@@ -1,13 +1,14 @@
 .useContainer {
   padding-top: 98px;
-  margin-left: 190px;
-  margin-bottom: 262px;
+  margin: 0 auto;
+  padding-right: 200px;
 }
 
 .usefulInfo {
   width: 350px;
   font-family: var(--main-font);
   text-align: left;
+  margin: 0 auto;
 }
 
 .usefulInfo:not(:last-child) {
@@ -58,9 +59,7 @@
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .useContainer {
-    padding-top: 120px;
-    margin-left: 115px;
-    margin-bottom: 416px;
+    padding-right: 200px;
   }
 }
 
