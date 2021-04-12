@@ -4,3 +4,10 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+@media screen and (max-width: 320px) {
+  .chart {
+    width: 156px;
+    height: 156px;
+  }
+}
