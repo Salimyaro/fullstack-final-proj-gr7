@@ -33,53 +33,45 @@ export default function AuthForm() {
   const handleLogin = async event => {
     event.preventDefault();
 
-    if (email.trim() === '' || password.trim() === '') {
-      toast.error('Please fill in the fields!', {
-        position: 'bottom-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    if (email.trim() !== /\S+@\S+\.\S+/ || password.trim().length < 6) {
+      toast.error(
+        'E-mail must be valid and the password must be longer than 5 characters!',
+        {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        },
+      );
       return;
     }
-    // if (event.target.value === '') {
-    //   toast.error('Please enter email!');
-    //   return;
-    // }
 
     return await onLogIn({ email, password });
-    // const data = await onLogIn({ email, password });
-    // console.log('dataAuthForm log', data);
-    // reset();
   };
 
   const handleRegister = async event => {
     event.preventDefault();
 
-    if (email.trim() === '' || password.trim() === '') {
-      toast.error('Please fill in the fields!', {
-        position: 'bottom-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    if (email.trim() !== /\S+@\S+\.\S+/ || password.trim().length < 6) {
+      toast.error(
+        'E-mail must be valid and the password must be longer than 5 characters!',
+        {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        },
+      );
       return;
     }
-    // if (email.trim() === '') {
-    //   toast.error('Please enter email!');
-    //   return;
-    // }
 
     return await signUp({ email, password });
-    // const data = await signUp({ email, password });
-    // console.log('dataAuthForm reg', data);
-    // reset();
   };
 
   const handleChangeEmail = event => {
