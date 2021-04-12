@@ -1,94 +1,64 @@
-import { useEffect, useState, Suspense, lazy } from 'react';
+import { lazy, Suspense, useContext, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { contactsDb } from './components/Contacts/contactsDb';
 import Container from './components/Container';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import Loader from './components/Loader';
-
-import Footer from './components/Footer';
-
 import PrivateRoute from './components/UserMenu/PrivateRoute';
 import PublicRoute from './components/UserMenu/PublicRoute';
+import AuthContext from './contexts/auth/context';
 
 const AuthPageView = lazy(() => import('./views/AuthPageView'));
 const MainPageView = lazy(() => import('./views/MainPageView'));
 const TestView = lazy(() => import('./views/TestView'));
-const ContactsPageView = lazy(() => import('./views/ContactsPageView'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
+const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
+const ContactsPageView = lazy(() => import('./components/Contacts'));
 
 export default function App() {
-  // const [authorized, setAuthorized] = useState('false');
+  const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    currentUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <Header />
       <Container>
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            <PublicRoute path="/auth" restricted>
+        <Switch>
+          <Suspense fallback={<Loader />}>
+            <PublicRoute exact path="/google-auth" redirectTo="/">
+              <GoogleAuth />
+            </PublicRoute>
+            <PublicRoute exact path="/auth" redirectTo="/" restricted>
               <AuthPageView />
             </PublicRoute>
-            <PrivateRoute path="/" exact>
+            <PublicRoute exact path="/contacts">
+              <ContactsPageView items={contactsDb} />
+            </PublicRoute>
+
+            <PrivateRoute exact path="/" redirectTo="/auth">
               <MainPageView />
             </PrivateRoute>
-            <PrivateRoute path="/test">
+            <PrivateRoute exact path="/test" redirectTo="/auth">
               <TestView />
             </PrivateRoute>
-            <PrivateRoute path="/results">
+            <PrivateRoute exact path="/results" redirectTo="/auth">
               <ResultsView />
             </PrivateRoute>
-            <PublicRoute path="/useful-info">
+            <PrivateRoute exact path="/useful-info" redirectTo="/auth">
               <UsefulInfoView />
-            </PublicRoute>
-            <PublicRoute path="/contacts" restricted>
-              <ContactsPageView />
-            </PublicRoute>
-          </Switch>
-        </Suspense>
+            </PrivateRoute>
+          </Suspense>
+        </Switch>
+        <ToastContainer autoClose={3000} />
       </Container>
       <Footer />
     </>
   );
-}
-
-{
-  /* <AppBar /> */
-}
-{
-  /* <Switch> */
-}
-{
-  /* <Suspense fallback={<p>Loading...</p>}> */
-}
-{
-  /* <PublicRoute exact path="/">
-                <HomeView />
-              </PublicRoute>
-              <PublicRoute
-                exact
-                path="/register"
-                redirectTo="/contacts"
-                restricted
-              >
-                <RegisterViev />
-              </PublicRoute>
-              <PublicRoute
-                exact
-                path="/login"
-                redirectTo="/contacts"
-                restricted
-              >
-                <LoginView />
-              </PublicRoute>
-              <PrivateRoute exact path="/contacts" redirectTo="/login">
-                <ContactsView />
-              </PrivateRoute> */
-}
-{
-  /* </Suspense> */
-}
-{
-  /* </Switch> */
 }

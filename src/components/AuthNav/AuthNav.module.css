@@ -1,0 +1,54 @@
+@import '../../assets/variables.css';
+.link {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--primary-color-text);
+}
+.activeLink {
+  border-bottom: 1px solid var(--active-component-color);
+}
+.navList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.link {
+  margin-right: 65px;
+}
+
+.navList li:last-child .link {
+  margin-right: 25px;
+}
+
+@media (max-width: 767px) {
+  .navContacts {
+    display: none;
+  }
+  .navList li .link {
+    margin-right: 0;
+  }
+  .navList li:last-child .link {
+    margin-right: 0;
+  }
+  .navList {
+    flex-direction: column;
+    width: 100%;
+  }
+  .navList li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    border-bottom: 1px solid var(--header-lines);
+  }
+}
+@media (min-width: 1280px) {
+  .navList li:last-child .link {
+    margin-right: 65px;
+  }
+  .link {
+    margin-right: 85px;
+  }
+}

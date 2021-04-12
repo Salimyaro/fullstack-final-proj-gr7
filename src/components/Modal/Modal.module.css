@@ -1,0 +1,25 @@
+@import '../../assets/variables.css';
+
+.Overlay {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--background-color);
+  border-top: 1px solid var(--header-lines);
+  z-index: 1200;
+}
+
+.Modal {
+  width: 100%;
+}
+
+@media (min-width: 767px) {
+  .Overlay {
+    display: none;
+  }
+}

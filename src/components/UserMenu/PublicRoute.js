@@ -1,16 +1,18 @@
-import { Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import AuthContext from '../../contexts/auth/context';
 
 export default function PublicRoute({
   children,
   restricted = false,
+  redirectTo = '/',
   ...routeProps
 }) {
-  // const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-  // const shouldRedirect = isLoggedIn && restricted;
-  // console.log('shouldRedirect', shouldRedirect);
+  const { isLoggedIn } = useContext(AuthContext);
+  const shouldRedirect = isLoggedIn && restricted;
   return (
     <Route {...routeProps}>
-      {/* {shouldRedirect ? <Redirect to="/contacts" /> : children} */}
+      {shouldRedirect ? <Redirect to={redirectTo} /> : children}
     </Route>
   );
 }

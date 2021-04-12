@@ -6,7 +6,7 @@ import s from './Spinner.module.css';
 export default function Spinner() {
   return (
     <div className={s.div}>
-      <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
+      <Loader type="ThreeDots" color="#ff6b09" height={80} width={80} />
     </div>
   );
 }

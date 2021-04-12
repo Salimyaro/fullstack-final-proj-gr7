@@ -1,0 +1,65 @@
+.testContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 820px;
+  margin: 0 auto 114px;
+}
+
+.textBox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 212px;
+  background-color: var(--inactive-component-color);
+}
+
+.textBox:hover {
+  background-color: var(--active-component-color);
+}
+
+.textBox::after {
+  position: absolute;
+  top: 74%;
+  left: 47%;
+  content: url('../../img/arrow-main.svg');
+}
+
+.linkText {
+  max-width: 60%;
+  margin: 0 auto;
+  color: var(--white-color);
+  text-align: center;
+  font-family: var(--main-font);
+  font-weight: var(--extra-bold);
+  font-size: 32px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .testContainer {
+    flex-direction: column;
+    width: 400px;
+    height: 454px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .testContainer {
+    flex-direction: column;
+    width: 280px;
+    height: 444px;
+  }
+
+  .textBox {
+    width: 280px;
+  }
+
+  .linkText {
+    font-size: 24px;
+  }
+}

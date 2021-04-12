@@ -1,0 +1,52 @@
+@import '../../assets/variables.css';
+
+.container {
+  display: flex;
+  align-items: center;
+}
+.avatar {
+  margin-right: 4px;
+}
+.name {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--primary-color-text);
+  margin-right: 20px;
+}
+.btnLoguot {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.btnLoguot::before {
+  position: absolute;
+  left: -20px;
+  top: -140%;
+  content: '';
+  display: block;
+  width: 1px;
+  height: 70px;
+  background-color: var(--header-lines);
+}
+.userName {
+  max-width: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .navigationDesc,
+  .userName,
+  .btnLoguot {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .avatarImg {
+    margin-right: 15px;
+  }
+}

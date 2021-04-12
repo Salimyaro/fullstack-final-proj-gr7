@@ -1,0 +1,18 @@
+@import '../../assets/variables.css';
+
+.linkMob {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--primary-color-text);
+}
+.activeLinkMob {
+  border-bottom: 1px solid var(--active-component-color);
+}
+.navContactsMob {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
