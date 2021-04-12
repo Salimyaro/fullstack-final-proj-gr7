@@ -1,12 +1,13 @@
 import { useState, useContext } from 'react';
 // import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Button from '@material-ui/core/Button';
-import { Box } from '@material-ui/core';
+// import Button from '@material-ui/core/Button';
+// import { Box } from '@material-ui/core';
 import s from './AuthForm.module.css';
 import AuthContext from '../../contexts/auth/context';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import '../../assets/variables.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // const useStyles = makeStyles(theme => ({
 //   sign: {
@@ -32,29 +33,45 @@ export default function AuthForm() {
   const handleLogin = async event => {
     event.preventDefault();
 
-    if (event.target.value === '') {
-      toast.error('Please enter email!');
+    if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
+      toast.error(
+        'E-mail must be valid and the password must be longer than 5 characters!',
+        {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        },
+      );
       return;
     }
 
     return await onLogIn({ email, password });
-    // const data = await onLogIn({ email, password });
-    // console.log('dataAuthForm log', data);
-    // reset();
   };
 
   const handleRegister = async event => {
     event.preventDefault();
 
-    if (email.trim() === '') {
-      toast.error('Please enter email!');
+    if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
+      toast.error(
+        'E-mail must be valid and the password must be longer than 5 characters!',
+        {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        },
+      );
       return;
     }
 
     return await signUp({ email, password });
-    // const data = await signUp({ email, password });
-    // console.log('dataAuthForm reg', data);
-    // reset();
   };
 
   const handleChangeEmail = event => {
@@ -67,9 +84,7 @@ export default function AuthForm() {
 
   return (
     <div className={s.form}>
-      <p className={s.account}>
-        You can use your Google Account to authorize:{' '}
-      </p>
+      <p className={s.account}>You can use your Google Account to authorize:</p>
       <div className={s.buttonGoogle}>
         <a
           href="https://goit-solo-tests-final-prg.herokuapp.com/auth/google"

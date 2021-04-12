@@ -48,6 +48,10 @@
   padding-left: 5px;
 }
 
+.itemLink {
+  color: var(--primary-color-text);
+}
+
 .book {
   text-decoration: none;
 }
@@ -60,32 +64,39 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .useContainer {
     padding-top: 40px;
-    margin-left: 20px;
-    margin-bottom: 112px;
+    padding-right: 80px;
+    margin: 0 auto;
+    /* margin-left: 20px; */
+    /* margin-bottom: 112px; */
   }
 
   .usefulInfo {
     width: 200px;
+    margin: 0 auto;
+  }
+
+  .usefulInfo:not(:last-child) {
+    margin-bottom: 30px;
   }
 
   .title {
     font-size: 18px;
     line-height: 22px;
-    margin-bottom: 38px;
+    margin-bottom: 26px;
     width: 120px;
   }
 
   .title::after {
     width: 150px;
-    top: 70px;
+    top: 55px;
   }
 
   .list {
     font-size: 10px;
     line-height: 16px;
-    margin-left: 0px;
+    margin-left: 10px;
   }
 }

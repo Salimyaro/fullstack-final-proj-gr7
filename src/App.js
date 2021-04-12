@@ -33,7 +33,7 @@ export default function App() {
       <Container>
         <Switch>
           <Suspense fallback={<Loader />}>
-            <PublicRoute exact path="/google-auth" redirectTo="/" restricted>
+            <PublicRoute exact path="/google-auth" redirectTo="/">
               <GoogleAuth />
             </PublicRoute>
             <PublicRoute exact path="/auth" redirectTo="/" restricted>

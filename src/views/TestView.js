@@ -8,7 +8,9 @@ import arrowbl from '../img/arrow-bl.svg';
 import AnswersContext from '../contexts/answers/context';
 
 export default function Test() {
-  const { setUserAnswers, handleAnswerTest } = useContext(AnswersContext);
+  const { userAnswers, setUserAnswers, handleAnswerTest } = useContext(
+    AnswersContext,
+  );
 
   const [questions, setQuestions] = useState([]);
   const [activeQuestionId, setActiveQuestionId] = useState(0);
@@ -25,6 +27,10 @@ export default function Test() {
 
   const activeQuestionData = questions[activeQuestionId];
 
+  const isUserAnsvered = userAnswers.find(userAnswer => {
+    return userAnswer?.questionId === activeQuestionData?.questionId;
+  });
+
   const handleNextQuestion = () => {
     setActiveQuestionId(activeQuestionId + 1);
   };
@@ -35,10 +41,6 @@ export default function Test() {
 
   const testingLabel =
     testType === 'tech' ? 'QA technical training' : 'Testing theory';
-
-  function reset() {
-    setUserAnswers([]);
-  }
 
   useEffect(() => {
     setUserAnswers([]);
@@ -57,7 +59,7 @@ export default function Test() {
       <div className={s.finishContainer}>
         <p className={s.title}>[ {testingLabel}&#95; ]</p>
         <Link to="/">
-          <button className={s.buttonFinish} onClick={reset}>
+          <button className={s.buttonFinish}>
             <span className={s.buttonName}>Cancel test</span>
           </button>
         </Link>
@@ -69,6 +71,7 @@ export default function Test() {
         title={activeQuestionData.question}
         answers={activeQuestionData.answers}
         onAnswerChange={handleAnswerTest}
+        defaultValue={isUserAnsvered?.answer}
       />
       <div className={s.nextPrevContainer}>
         {activeQuestionId !== 0 && (
@@ -88,7 +91,11 @@ export default function Test() {
             <span className={s.submitName}>Submit</span>
           </button>
         ) : (
-          <button onClick={handleNextQuestion} className={s.nextButton}>
+          <button
+            disabled={!isUserAnsvered}
+            onClick={handleNextQuestion}
+            className={s.nextButton}
+          >
             <span className={s.nextName}>Next question</span>
             <img
               className={s.arrowRight}
