@@ -3,11 +3,88 @@
   height: 258px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+}
+
+.labelCorrect {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  top: 55%;
+  left: 95%;
+  transform: translateY(-10px);
+}
+
+.labelIncorrect {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  top: 45%;
+  left: 95%;
+  transform: translateY(-10px);
+}
+
+.labelArrow {
+  width: 75px;
+  height: 1px;
+  background-color: black;
+  margin-right: 10px;
+}
+
+.colorBoxCorrect {
+  width: 20px;
+  height: 20px;
+  background-color: #ff6b09;
+}
+
+.colorBoxIncorrect {
+  width: 20px;
+  height: 20px;
+  background-color: #d7d7d7;
+}
+
+.labelText {
+  font-size: 16px;
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 320px) {
   .chart {
     width: 156px;
     height: 156px;
+  }
+
+  .labelArrow {
+    width: 25px;
+    height: 1px;
+    background-color: black;
+    margin-right: 5px;
+  }
+
+  .colorBoxCorrect {
+    width: 10px;
+    height: 10px;
+  }
+
+  .colorBoxIncorrect {
+    width: 10px;
+    height: 10px;
+  }
+
+  .labelText {
+    font-size: 8px;
+    margin-left: 5px;
+  }
+
+  .labelCorrect {
+    width: 75px;
+  }
+  .labelIncorrect {
+    width: 75px;
+    top: 40%;
   }
 }

@@ -8,17 +8,9 @@ import catSmall from '../img/cat_120px.png';
 import s from './ResultsView.module.css';
 
 export default function Results() {
-  const mockResults = {
-    data: {
-      mainMessage: 'Keep learning!',
-      result: 40,
-      secondaryMessage: 'You still have a lot to learn, keep going!',
-    },
-  };
-
   const { userAnswers } = useContext(AnswersContext);
   const { fetchResults } = useContext(AuthContext);
-  const [results, setResults] = useState(mockResults);
+  const [results, setResults] = useState(null);
   const location = useLocation();
   const testType = new URLSearchParams(location.search).get('type');
 
@@ -35,7 +27,6 @@ export default function Results() {
   const correctAnswers = results
     ? Math.floor((12 * results.data.result) / 100)
     : null;
-  console.log(window.innerWidth);
 
   return results ? (
     <div className={s.container}>
