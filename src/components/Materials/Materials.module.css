@@ -64,15 +64,18 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .useContainer {
     padding-top: 40px;
-    margin-left: 20px;
-    margin-bottom: 112px;
+    padding-right: 80px;
+    margin: 0 auto;
+    /* margin-left: 20px; */
+    /* margin-bottom: 112px; */
   }
 
   .usefulInfo {
     width: 200px;
+    margin: 0 auto;
   }
 
   .usefulInfo:not(:last-child) {
