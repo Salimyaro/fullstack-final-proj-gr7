@@ -40,7 +40,7 @@
   text-decoration: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1279px) {
   .testContainer {
     flex-direction: column;
     width: 400px;
@@ -48,8 +48,9 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 320px) and (max-width: 767px) {
   .testContainer {
+    flex-direction: column;
     width: 280px;
     height: 444px;
   }
