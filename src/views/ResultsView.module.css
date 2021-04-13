@@ -1,4 +1,5 @@
 .container {
+  min-height: calc(100vh - 71px - 60px);
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: var(--white-color);
@@ -51,8 +52,8 @@
 }
 
 .catImage {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  display: block;
+  margin: 20px auto 10px;
 }
 
 .resultsMessage {
