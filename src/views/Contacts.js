@@ -1,5 +1,5 @@
-import ContactCard from './contact-card';
-import s from './Contacts.module.css';
+import ContactCard from '../components/Contacts/contact-card';
+import s from '../components/Contacts/Contacts.module.css';
 
 export default function Contacts({ items }) {
   return (

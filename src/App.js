@@ -16,7 +16,7 @@ const TestView = lazy(() => import('./views/TestView'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
 const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
-const ContactsPageView = lazy(() => import('./components/Contacts'));
+const ContactsPageView = lazy(() => import('./views/Contacts'));
 
 export default function App() {
   const { currentUser } = useContext(AuthContext);
