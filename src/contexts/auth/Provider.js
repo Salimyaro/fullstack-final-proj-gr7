@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useMemo, useState } from 'react';
 import authContext from './context';
 
-axios.defaults.baseURL = 'https://fin-proj-gr7.herokuapp.com';
+axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
