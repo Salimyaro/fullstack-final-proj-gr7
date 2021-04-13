@@ -13,17 +13,8 @@ export default function AuthForm() {
   const handleLogin = async event => {
     event.preventDefault();
     if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
-      toast.error(
+      toast.dark(
         'E-mail must be valid and the password must be longer than 5 characters!',
-        {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        },
       );
       return;
     }
@@ -33,17 +24,8 @@ export default function AuthForm() {
   const handleRegister = async event => {
     event.preventDefault();
     if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
-      toast.error(
+      toast.dark(
         'E-mail must be valid and the password must be longer than 5 characters!',
-        {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        },
       );
       return;
     }

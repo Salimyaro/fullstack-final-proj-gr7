@@ -11,14 +11,14 @@ import Tsotsko from './img/Tsotsko280.jpg';
 export const contactsDb = [
   {
     id: 1,
-    name: 'Aslanov Rustam',
+    name: 'Rustam Aslanov',
     url: 'https://github.com/AslanovRustam',
     photo: AslanovRustam,
     role: 'Scrum Master, Front-End Developer',
   },
   {
     id: 2,
-    name: 'Salimov Yaroslav',
+    name: 'Yaroslav Salimov',
     url: 'https://github.com/Salimyaro',
     photo: SalimovYaroslav,
     role: 'Team Lead, Back-End Developer',
@@ -32,14 +32,14 @@ export const contactsDb = [
   },
   {
     id: 4,
-    name: 'Solomka Vitaliy',
+    name: 'Vitaliy Solomka',
     url: 'https://github.com/dkvvs',
     photo: SolomkaVitaliy,
     role: 'Front-End Developer',
   },
   {
     id: 5,
-    name: 'Bondarenko Svetlana',
+    name: 'Svetlana Bondarenko',
     url: 'https://github.com/svogk',
     photo: BondarenkoSvetlana,
     role: 'Front-End Developer',

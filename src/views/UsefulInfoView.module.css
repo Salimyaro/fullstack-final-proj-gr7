@@ -1,5 +1,6 @@
 .bgImage {
-  background-image: url('../img/materials-bg.jpg');
+  /* background-image: url('../img/materials-bg.jpg'); */
+  background-image: url('../img/materialsBg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
@@ -11,15 +12,16 @@
   left: 0;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+/* @media screen and (min-width: 768px) and (max-width: 1279px) {
   .bgImage {
     background-image: url('../img/materials-bg-tablet.jpg');
+    background-image: url('../img/materialsBg.jpg');
   }
 }
 
 @media screen and (max-width: 767px) {
   .bgImage {
-    min-height: 510px;
     background-image: url('../img/materials-bg-mobile.jpg');
+    background-image: url('../img/materialsBg.jpg');
   }
-}
+} */
