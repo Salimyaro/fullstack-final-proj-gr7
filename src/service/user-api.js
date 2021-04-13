@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useState } from 'react';
 axios.defaults.baseURL = 'https://fin-proj-gr7.herokuapp.com';
 
 export async function login(user) {
