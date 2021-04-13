@@ -8,11 +8,11 @@ axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  console.log('providerUser: ', user);
-  console.log(
-    'storage: ',
-    JSON.parse(window.localStorage.getItem('token-stor')),
-  );
+  // console.log('providerUser: ', user);
+  // console.log(
+  //   'storage: ',
+  //   JSON.parse(window.localStorage.getItem('token-stor')),
+  // );
 
   const history = useHistory();
 
@@ -25,43 +25,12 @@ export default function Provider({ children }) {
     },
   };
 
-  const onRefresh = async res => {
+  const onRefresh = async response => {
     const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
-    if (res.status.toString() === '401') {
-      token.set(storageToken.refreshToken);
-      const res = await axios.post('/auth/refresh');
-      token.set(res.data.data.refreshToken);
-      if (res.status.toString() === '401') {
-        onLogOut();
-        return;
-      }
-      if (res.status.toString() === '200') {
-        setIsLoggedIn(true);
-        window.localStorage.setItem(
-          'token-stor',
-          JSON.stringify({
-            accessToken: res.data.data.token,
-            refreshToken: res.data.data.refreshToken,
-          }),
-        );
-        token.set(res.data.data.token);
-      }
-    }
-  };
+    token.set(storageToken.token);
 
-  const signUp = async user => {
-    const res = await axios.post('/auth/register', user);
+    const res = await axios.get('/user');
 
-    setUser(res.data.data);
-    setIsLoggedIn(true);
-    token.set(res.data.data.token);
-    return res.data;
-  };
-
-  const onLogIn = async user => {
-    const res = await axios.post('/auth/login', user);
-    console.log('provider pesponse login: ', res.data);
-    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
     if (res.status.toString() === '401') {
       token.set(storageToken.refreshToken);
       const res = await axios.post('/auth/refresh');
@@ -76,19 +45,87 @@ export default function Provider({ children }) {
         window.localStorage.setItem(
           'token-stor',
           JSON.stringify({
-            accessToken: res.data.data.token,
+            token: res.data.data.token,
             refreshToken: res.data.data.refreshToken,
           }),
         );
         token.set(res.data.data.token);
-        return res.data;
+        return;
+      }
+    }
+  };
+
+  const signUp = async user => {
+    const res = await axios.post('/auth/register', user);
+    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
+
+    if (res.status.toString() === '401') {
+      token.set(storageToken.refreshToken);
+      const res = await axios.post('/auth/refresh');
+
+      if (res.status.toString() === '401') {
+        onLogOut();
+        return;
+      }
+      if (res.status.toString() === '200') {
+        setIsLoggedIn(true);
+        setUser(res.data.data);
+        window.localStorage.setItem(
+          'token-stor',
+          JSON.stringify({
+            token: res.data.data.token,
+            refreshToken: res.data.data.refreshToken,
+          }),
+        );
+        token.set(res.data.data.token);
+        return;
+      }
+    }
+    window.localStorage.setItem(
+      'token-stor',
+      JSON.stringify({
+        token: res.data.data.token,
+        refreshToken: res.data.data.refreshToken,
+      }),
+    );
+    setUser(res.data.data);
+    setIsLoggedIn(true);
+    token.set(res.data.data.token);
+    return res.data;
+  };
+
+  const onLogIn = async user => {
+    const res = await axios.post('/auth/login', user);
+
+    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
+
+    if (res.status.toString() === '401') {
+      token.set(storageToken.refreshToken);
+      const res = await axios.post('/auth/refresh');
+
+      if (res.status.toString() === '401') {
+        onLogOut();
+        return;
+      }
+      if (res.status.toString() === '200') {
+        setIsLoggedIn(true);
+        setUser(res.data.data);
+        window.localStorage.setItem(
+          'token-stor',
+          JSON.stringify({
+            token: res.data.data.token,
+            refreshToken: res.data.data.refreshToken,
+          }),
+        );
+        token.set(res.data.data.token);
+        return;
       }
     }
 
     window.localStorage.setItem(
       'token-stor',
       JSON.stringify({
-        accessToken: res.data.data.token,
+        token: res.data.data.token,
         refreshToken: res.data.data.refreshToken,
       }),
     );
@@ -99,7 +136,32 @@ export default function Provider({ children }) {
   };
 
   const onLogOut = async () => {
+    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
+    token.set(storageToken.token);
     const res = await axios.post('/auth/logout');
+
+    if (res.status.toString() === '401') {
+      token.set(storageToken.refreshToken);
+      const res = await axios.post('/auth/refresh');
+
+      if (res.status.toString() === '401') {
+        setIsLoggedIn(false);
+        setUser(null);
+        token.unset();
+        window.localStorage.setItem('token-stor', JSON.stringify(''));
+        return;
+      }
+      if (res.status.toString() === '204') {
+        window.localStorage.setItem(
+          'token-stor',
+          JSON.stringify({
+            token: res.data.data.token,
+            refreshToken: res.data.data.refreshToken,
+          }),
+        );
+        return;
+      }
+    }
 
     setUser(null);
     setIsLoggedIn(false);
@@ -110,6 +172,7 @@ export default function Provider({ children }) {
 
   const fetchResults = async (answers, testType) => {
     const { data } = await axios.post(`/results/${testType}`, answers);
+
     return data;
   };
 
@@ -118,10 +181,11 @@ export default function Provider({ children }) {
       setIsLoggedIn(false);
       return;
     }
+
     const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
-    // token.set(storageToken.refreshToken);
+    token.set(storageToken.token);
+
     const res = await axios.get('/user');
-    console.log('provider pesponse current: ', res);
 
     if (res.status.toString() === '401') {
       token.set(storageToken.refreshToken);
@@ -137,11 +201,12 @@ export default function Provider({ children }) {
         window.localStorage.setItem(
           'token-stor',
           JSON.stringify({
-            accessToken: res.data.data.token,
+            token: res.data.data.token,
             refreshToken: res.data.data.refreshToken,
           }),
         );
         token.set(res.data.data.token);
+        return;
       }
     }
 
