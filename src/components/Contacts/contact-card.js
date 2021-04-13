@@ -3,7 +3,7 @@ import s from './Contacts.module.css';
 export default function ContactsCard({ name, url, photo, role }) {
   return (
     <a className={s.contactLink} target="_blank" rel="noreferrer" href={url}>
-      <picture width="244px" height="280px">
+      <picture>
         <img
           className={s.contactPhoto}
           src={photo}
