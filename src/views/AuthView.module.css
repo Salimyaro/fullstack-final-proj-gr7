@@ -9,8 +9,8 @@
   padding-left: 15px;
   padding-right: 15px;
 
-  margin-top: 39px;
-  margin-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
   font-family: var(--main-font);
@@ -36,7 +36,7 @@
   line-height: 1.67;
   color: var(--secondary-color-text);
   letter-spacing: 0.02em;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .span {
@@ -47,13 +47,13 @@
 @media screen and (min-width: 768px) {
   .container {
     max-width: 1279px;
-    margin-top: 80px;
-    margin-bottom: 70px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .proTest {
     font-size: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .paragraph {
@@ -68,8 +68,8 @@
     max-width: 1440px;
     align-items: start;
     flex-direction: row;
-    margin-top: 99px;
-    margin-bottom: 99px;
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
 
   .aboutTest {
@@ -79,7 +79,7 @@
 
   .proTest {
     font-size: 34px;
-    margin-bottom: 19px;
+    margin-bottom: 15px;
   }
 
   .paragraph {
