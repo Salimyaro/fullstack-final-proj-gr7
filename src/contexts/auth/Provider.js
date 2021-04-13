@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import authContext from './context';
 
 axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
@@ -7,6 +8,13 @@ axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  console.log('providerUser: ', user);
+  console.log(
+    'storage: ',
+    JSON.parse(window.localStorage.getItem('token-stor')),
+  );
+
+  const history = useHistory();
 
   const token = {
     set(token) {
@@ -17,30 +25,87 @@ export default function Provider({ children }) {
     },
   };
 
+  const onRefresh = async res => {
+    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
+    if (res.status.toString() === '401') {
+      token.set(storageToken.refreshToken);
+      const res = await axios.post('/auth/refresh');
+      token.set(res.data.data.refreshToken);
+      if (res.status.toString() === '401') {
+        onLogOut();
+        return;
+      }
+      if (res.status.toString() === '200') {
+        setIsLoggedIn(true);
+        window.localStorage.setItem(
+          'token-stor',
+          JSON.stringify({
+            accessToken: res.data.data.token,
+            refreshToken: res.data.data.refreshToken,
+          }),
+        );
+        token.set(res.data.data.token);
+      }
+    }
+  };
+
   const signUp = async user => {
-    const { data } = await axios.post('/auth/register', user);
-    setUser(data.data);
+    const res = await axios.post('/auth/register', user);
+
+    setUser(res.data.data);
     setIsLoggedIn(true);
-    token.set(data.data.token);
-    return data;
+    token.set(res.data.data.token);
+    return res.data;
   };
 
   const onLogIn = async user => {
-    const { data } = await axios.post('/auth/login', user);
-    token.set(data.data.token);
-    window.localStorage.setItem('token-stor', JSON.stringify(data.data.token));
+    const res = await axios.post('/auth/login', user);
+    console.log('provider pesponse login: ', res.data);
+    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
+    if (res.status.toString() === '401') {
+      token.set(storageToken.refreshToken);
+      const res = await axios.post('/auth/refresh');
+
+      if (res.status.toString() === '401') {
+        onLogOut();
+        return;
+      }
+      if (res.status.toString() === '200') {
+        setIsLoggedIn(true);
+        setUser(res.data.data);
+        window.localStorage.setItem(
+          'token-stor',
+          JSON.stringify({
+            accessToken: res.data.data.token,
+            refreshToken: res.data.data.refreshToken,
+          }),
+        );
+        token.set(res.data.data.token);
+        return res.data;
+      }
+    }
+
+    window.localStorage.setItem(
+      'token-stor',
+      JSON.stringify({
+        accessToken: res.data.data.token,
+        refreshToken: res.data.data.refreshToken,
+      }),
+    );
+    setUser(res.data.data);
     setIsLoggedIn(true);
-    setUser(data.data);
-    return data;
+    token.set(res.data.data.token);
+    return res.data;
   };
 
   const onLogOut = async () => {
-    const { data } = await axios.post('/auth/logout');
+    const res = await axios.post('/auth/logout');
+
     setUser(null);
     setIsLoggedIn(false);
     token.unset();
     window.localStorage.setItem('token-stor', JSON.stringify(''));
-    return data;
+    return res.data;
   };
 
   const fetchResults = async (answers, testType) => {
@@ -53,11 +118,37 @@ export default function Provider({ children }) {
       setIsLoggedIn(false);
       return;
     }
-    token.set(JSON.parse(window.localStorage.getItem('token-stor')));
-    const { data } = await axios.get('/user');
+    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
+    // token.set(storageToken.refreshToken);
+    const res = await axios.get('/user');
+    console.log('provider pesponse current: ', res);
+
+    if (res.status.toString() === '401') {
+      token.set(storageToken.refreshToken);
+      const res = await axios.post('/auth/refresh');
+
+      if (res.status.toString() === '401') {
+        onLogOut();
+        return;
+      }
+      if (res.status.toString() === '200') {
+        setIsLoggedIn(true);
+        setUser(res.data.data);
+        window.localStorage.setItem(
+          'token-stor',
+          JSON.stringify({
+            accessToken: res.data.data.token,
+            refreshToken: res.data.data.refreshToken,
+          }),
+        );
+        token.set(res.data.data.token);
+      }
+    }
+
+    setUser(res.data.data);
     setIsLoggedIn(true);
-    setUser(data.data);
-    return data;
+    token.set(res.data.data.token);
+    return res.data;
   };
 
   const onGoogleLogin = () => {
