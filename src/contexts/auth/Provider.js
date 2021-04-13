@@ -2,11 +2,12 @@ import axios from 'axios';
 import { useMemo, useState } from 'react';
 import authContext from './context';
 
-axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
+axios.defaults.baseURL = 'https://fin-proj-gr7.herokuapp.com';
 
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [loding, setLoading] = useState(false);
 
   const token = {
     set(token) {
@@ -18,7 +19,9 @@ export default function Provider({ children }) {
   };
 
   const signUp = async user => {
+    setLoading(true);
     const { data } = await axios.post('/auth/register', user);
+    setLoading(false);
     setUser(data.data);
     setIsLoggedIn(true);
     token.set(data.data.token);
@@ -26,7 +29,9 @@ export default function Provider({ children }) {
   };
 
   const onLogIn = async user => {
+    setLoading(true);
     const { data } = await axios.post('/auth/login', user);
+    setLoading(false);
     token.set(data.data.token);
     window.localStorage.setItem('token-stor', JSON.stringify(data.data.token));
     setIsLoggedIn(true);
@@ -35,7 +40,9 @@ export default function Provider({ children }) {
   };
 
   const onLogOut = async () => {
+    setLoading(true);
     const { data } = await axios.post('/auth/logout');
+    setLoading(false);
     setUser(null);
     setIsLoggedIn(false);
     token.unset();
@@ -44,7 +51,9 @@ export default function Provider({ children }) {
   };
 
   const fetchResults = async (answers, testType) => {
+    setLoading(true);
     const { data } = await axios.post(`/results/${testType}`, answers);
+    setLoading(false);
     return data;
   };
 
@@ -54,7 +63,9 @@ export default function Provider({ children }) {
       return;
     }
     token.set(JSON.parse(window.localStorage.getItem('token-stor')));
+    setLoading(true);
     const { data } = await axios.get('/user');
+    setLoading(false);
     setIsLoggedIn(true);
     setUser(data.data);
     return data;

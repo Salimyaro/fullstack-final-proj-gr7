@@ -1,5 +1,6 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
+import { useState } from 'react';
+axios.defaults.baseURL = 'https://fin-proj-gr7.herokuapp.com';
 
 export async function login(user) {
   const { data } = await axios.post('/auth/login', user);

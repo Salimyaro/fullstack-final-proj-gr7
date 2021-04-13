@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../contexts/auth/context';
 
-axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
+axios.defaults.baseURL = 'https://fin-proj-gr7.herokuapp.com';
 
 export default function GoogleAuth() {
   const { currentUser, onGoogleLogin } = useContext(AuthContext);
