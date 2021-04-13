@@ -25,35 +25,35 @@ export default function Provider({ children }) {
     },
   };
 
-  const onRefresh = async response => {
-    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
-    token.set(storageToken.token);
+  // const onRefresh = async response => {
+  //   const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
+  //   token.set(storageToken.token);
 
-    const res = await axios.get('/user');
+  //   const res = await axios.get('/user');
 
-    if (res.status.toString() === '401') {
-      token.set(storageToken.refreshToken);
-      const res = await axios.post('/auth/refresh');
+  //   if (res.status.toString() === '401') {
+  //     token.set(storageToken.refreshToken);
+  //     const res = await axios.post('/auth/refresh');
 
-      if (res.status.toString() === '401') {
-        onLogOut();
-        return;
-      }
-      if (res.status.toString() === '200') {
-        setIsLoggedIn(true);
-        setUser(res.data.data);
-        window.localStorage.setItem(
-          'token-stor',
-          JSON.stringify({
-            token: res.data.data.token,
-            refreshToken: res.data.data.refreshToken,
-          }),
-        );
-        token.set(res.data.data.token);
-        return;
-      }
-    }
-  };
+  //     if (res.status.toString() === '401') {
+  //       onLogOut();
+  //       return;
+  //     }
+  //     if (res.status.toString() === '200') {
+  //       setIsLoggedIn(true);
+  //       setUser(res.data.data);
+  //       window.localStorage.setItem(
+  //         'token-stor',
+  //         JSON.stringify({
+  //           token: res.data.data.token,
+  //           refreshToken: res.data.data.refreshToken,
+  //         }),
+  //       );
+  //       token.set(res.data.data.token);
+  //       return;
+  //     }
+  //   }
+  // };
 
   const signUp = async user => {
     const res = await axios.post('/auth/register', user);
@@ -148,10 +148,11 @@ export default function Provider({ children }) {
         setIsLoggedIn(false);
         setUser(null);
         token.unset();
-        window.localStorage.setItem('token-stor', JSON.stringify(''));
+        window.localStorage.removeItem('token-stor');
+        history.push('/auth');
         return;
       }
-      if (res.status.toString() === '204') {
+      if (res.status.toString() === '200') {
         window.localStorage.setItem(
           'token-stor',
           JSON.stringify({
@@ -166,14 +167,44 @@ export default function Provider({ children }) {
     setUser(null);
     setIsLoggedIn(false);
     token.unset();
-    window.localStorage.setItem('token-stor', JSON.stringify(''));
+    window.localStorage.removeItem('token-stor');
+    history.push('/auth');
     return res.data;
   };
 
   const fetchResults = async (answers, testType) => {
-    const { data } = await axios.post(`/results/${testType}`, answers);
+    const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
+    token.set(storageToken.token);
+    console.log('results');
 
-    return data;
+    const res = await axios.post(`/results/${testType}`, answers);
+    console.log('fetchresults rsponse: ', res);
+
+    if (res.status.toString() === '401') {
+      token.set(storageToken.refreshToken);
+      const res = await axios.post('/auth/refresh');
+
+      if (res.status.toString() === '401') {
+        onLogOut();
+        return;
+      }
+      if (res.status.toString() === '200') {
+        window.localStorage.setItem(
+          'token-stor',
+          JSON.stringify({
+            token: res.data.data.token,
+            refreshToken: res.data.data.refreshToken,
+          }),
+        );
+        history.push(`/results?type=${testType}`);
+        token.set(res.data.data.token);
+
+        return;
+      }
+    }
+    history.push(`/results?type=${testType}`);
+
+    return res.data;
   };
 
   const currentUser = async () => {
@@ -184,8 +215,10 @@ export default function Provider({ children }) {
 
     const storageToken = JSON.parse(window.localStorage.getItem('token-stor'));
     token.set(storageToken.token);
+    console.log('current user');
 
     const res = await axios.get('/user');
+    console.log(res);
 
     if (res.status.toString() === '401') {
       token.set(storageToken.refreshToken);
