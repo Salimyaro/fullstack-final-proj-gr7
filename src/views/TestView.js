@@ -54,6 +54,8 @@ export default function Test() {
     history.push(`/results?type=${testType}`);
   };
 
+  const isActive = !isUserAnsvered ? `${s.nextButtonActiv}` : `${s.nextButton}`;
+
   return (
     <div className={s.buttonContainer}>
       <div className={s.finishContainer}>
@@ -89,7 +91,7 @@ export default function Test() {
         {activeQuestionId === 11 ? (
           <button
             disabled={!isUserAnsvered}
-            className={s.nextButton}
+            className={isActive}
             onClick={submitAnswers}
           >
             <span className={s.submitName}>Submit</span>
@@ -98,7 +100,7 @@ export default function Test() {
           <button
             disabled={!isUserAnsvered}
             onClick={handleNextQuestion}
-            className={s.nextButton}
+            className={isActive}
           >
             <span className={s.nextName}>Next question</span>
             <img
