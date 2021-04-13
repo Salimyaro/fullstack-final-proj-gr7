@@ -1,41 +1,36 @@
 import { useState, useContext } from 'react';
-// import axios from 'axios';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
-// import { login, signUp } from '../../service/user-api';
 import s from './AuthForm.module.css';
 import AuthContext from '../../contexts/auth/context';
 
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loding, setLoading] = useState(false);
   const { onLogIn, signUp } = useContext(AuthContext);
 
   const handleLogin = async event => {
     event.preventDefault();
-
     if (email.trim() === '') {
       toast.error('Please enter email!');
       return;
     }
-
+    setLoading(true);
     const data = await onLogIn({ email, password });
-    // console.log('dataAuthForm log', data);
-    // reset();
+    setLoading(false);
   };
 
   const handleRegister = async event => {
     event.preventDefault();
-
     if (email.trim() === '') {
       toast.error('Please enter email!');
       return;
     }
-
+    setLoading(true);
     const data = await signUp({ email, password });
-    // console.log('dataAuthForm reg', data);
-    // reset();
+    setLoading(false);
   };
 
   const handleChangeEmail = event => {
@@ -45,11 +40,6 @@ export default function AuthForm() {
   const handleChangePassword = event => {
     setPassword(event.currentTarget.value);
   };
-
-  // const reset = () => {
-  //   setEmail('');
-  //   setPassword('');
-  // };
 
   return (
     <div className={s.form}>

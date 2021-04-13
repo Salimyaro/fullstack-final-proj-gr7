@@ -1,11 +1,11 @@
-import { useEffect, Suspense, lazy, useContext } from 'react';
+import { useEffect, Suspense, lazy, useState, useContext } from 'react';
 import { Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Container from './components/Container';
 import Header from './components/Header';
-import Loader from './components/Loader';
+import LoaderBlur from './components/LoaderBlur';
 import AuthContext from './contexts/auth/context';
-import {contactsDb} from './components/Contacts/contactsDb'
+import { contactsDb } from './components/Contacts/contactsDb';
 import Footer from './components/Footer';
 
 import PrivateRoute from './components/UserMenu/PrivateRoute';
@@ -19,11 +19,13 @@ const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
 
 export default function App() {
+  const [loding, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
+    setLoading(true);
     currentUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setLoading(false);
   }, []);
 
   return (
@@ -31,12 +33,12 @@ export default function App() {
       <Header />
       <Container>
         <Switch>
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<LoaderBlur />}>
             <PublicRoute exact path="/auth" redirectTo="/" restricted>
               <AuthPageView />
             </PublicRoute>
             <PublicRoute exact path="/contacts">
-              <ContactsPageView items={contactsDb}/>
+              <ContactsPageView items={contactsDb} />
             </PublicRoute>
 
             <PrivateRoute exact path="/" redirectTo="/auth">

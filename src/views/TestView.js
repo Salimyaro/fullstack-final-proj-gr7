@@ -9,7 +9,7 @@ import AnswersContext from '../contexts/answers/context';
 
 export default function Test() {
   const { setUserAnswers, handleAnswerTest } = useContext(AnswersContext);
-
+  const [loding, setLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [activeQuestionId, setActiveQuestionId] = useState(0);
 
@@ -20,7 +20,9 @@ export default function Test() {
   const testType = search.get('type');
 
   useEffect(() => {
+    setLoading(true);
     getTest(testType).then(({ data }) => setQuestions(data.tests));
+    setLoading(false);
   }, [testType]);
 
   const activeQuestionData = questions[activeQuestionId];
