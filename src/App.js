@@ -5,7 +5,7 @@ import { contactsDb } from './components/Contacts/contactsDb';
 import Container from './components/Container';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import LoaderBlur from './components/LoaderBlur';
+import Loader from './components/Loader';
 import PrivateRoute from './components/UserMenu/PrivateRoute';
 import PublicRoute from './components/UserMenu/PublicRoute';
 import AuthContext from './contexts/auth/context';
@@ -31,7 +31,7 @@ export default function App() {
       <Header />
       <Container>
         <Switch>
-          <Suspense fallback={<LoaderBlur />}>
+          <Suspense fallback={<Loader />}>
             <PublicRoute exact path="/google-auth" redirectTo="/">
               <GoogleAuth />
             </PublicRoute>
