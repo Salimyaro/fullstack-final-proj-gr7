@@ -19,39 +19,32 @@ export default function Provider({ children }) {
   };
 
   const signUp = async user => {
-    // setLoading(true);
     const { data } = await axios.post('/auth/register', user);
     setUser(data.data);
     setIsLoggedIn(true);
     token.set(data.data.token);
-    // setLoading(false);
     return data;
   };
 
   const onLogIn = async user => {
-    // setLoading(true);
     const { data } = await axios.post('/auth/login', user);
     setUser(data.data);
     setIsLoggedIn(true);
     token.set(data.data.token);
     window.localStorage.setItem('token-stor', JSON.stringify(data.data.token));
-    // setLoading(false);
     return data;
   };
 
   const onLogOut = async () => {
-    // setLoading(true);
     const { data } = await axios.post('/auth/logout');
     setUser(null);
     setIsLoggedIn(false);
     token.unset();
     window.localStorage.setItem('token-stor', JSON.stringify(''));
-    // setLoading(false);
     return data;
   };
 
   const currentUser = async () => {
-    // setLoading(true);
     if (!JSON.parse(window.localStorage.getItem('token-stor'))) {
       return;
     }
@@ -61,7 +54,6 @@ export default function Provider({ children }) {
 
     setUser(data.data);
     setIsLoggedIn(true);
-    // setLoading(false);
     return data;
   };
 
