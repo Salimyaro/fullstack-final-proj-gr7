@@ -39,7 +39,7 @@ export default function Results() {
 
   return (
     <>
-      {results && (
+      {results ? (
         <div className={s.container}>
           <h2 className={s.heading}>Results</h2>
           <p className={s.testTitle}>[{testingLabel.toUpperCase()}_]</p>
@@ -70,6 +70,8 @@ export default function Results() {
             Try again
           </Link>
         </div>
+      ) : (
+        <div className={s.errorMessage}>Plase complete the test first</div>
       )}
       {loading && <LoaderBlur />}
       {error && <div>{error}</div>}
