@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import Questions from '../components/Questions';
 import AnswersContext from '../contexts/answers/context';
+import AuthContext from '../contexts/auth/context';
 import arrowbl from '../img/arrow-bl.svg';
 import arrowbr from '../img/arrow-br.svg';
-import { getTest } from '../service/user-api';
 import s from './TestView.module.css';
 
 export default function Test() {
+  const { getTest } = useContext(AuthContext);
   const { userAnswers, setUserAnswers, handleAnswerTest } = useContext(
     AnswersContext,
   );
@@ -22,7 +23,10 @@ export default function Test() {
   const testType = search.get('type');
 
   useEffect(() => {
-    getTest(testType).then(({ data }) => setQuestions(data.tests));
+    getTest(testType).then(res => {
+      setQuestions(res.data.tests);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testType]);
 
   const activeQuestionData = questions[activeQuestionId];
