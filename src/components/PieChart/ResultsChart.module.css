@@ -52,7 +52,7 @@
   margin-left: 10px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
   .chart {
     width: 156px;
     height: 156px;

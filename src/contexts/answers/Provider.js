@@ -24,6 +24,8 @@ const AnswersProvider = ({ children }) => {
     } else {
       setUserAnswers(prevState => [...prevState, data]);
     }
+
+    console.log(userAnswers);
   };
 
   return (

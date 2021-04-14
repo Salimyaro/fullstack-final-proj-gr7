@@ -15,7 +15,7 @@ export default function Results() {
   const testType = new URLSearchParams(location.search).get('type');
 
   const answers = { answers: userAnswers };
-
+  console.log('UserAnswers: ', userAnswers);
   const testingLabel =
     testType === 'tech' ? 'QA technical training' : 'Testing theory';
 
