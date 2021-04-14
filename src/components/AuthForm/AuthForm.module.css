@@ -75,6 +75,19 @@
   border: 1px solid var(--border-form);
   outline: none;
 }
+.formLabel {
+  display: flex;
+  position: relative;
+  /* margin-bottom: 20px; */
+}
+.eyeBtn {
+  position: absolute;
+  right: 10px;
+  top: 25%;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
 
 .sign:hover,
 .sign:focus {

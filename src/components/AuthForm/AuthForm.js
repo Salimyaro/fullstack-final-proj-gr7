@@ -1,5 +1,3 @@
-import Button from '@material-ui/core/Button';
-import { Box } from '@material-ui/core';
 import { useContext, useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,12 +5,21 @@ import '../../assets/variables.css';
 import AuthContext from '../../contexts/auth/context';
 import s from './AuthForm.module.css';
 import { ReactComponent as GoogleIcon } from 'img/google-symbol.svg';
+import Eye from '../../img/eye.svg';
+import EyeHide from '../../img/eye-blocked.svg';
 
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { onLogIn, signUp, error } = useContext(AuthContext);
+
+  const [showPassword, setShowPassword] = useState(true);
+
+  const handleClickShowPassword = e => {
+    e.preventDefault();
+    setShowPassword(!showPassword);
+  };
 
   const mountedRef = useRef(true);
   useEffect(() => {
@@ -30,9 +37,11 @@ export default function AuthForm() {
       );
       return;
     }
+
     setLoading(true);
     const data = await onLogIn({ email, password });
     mountedRef.current && setLoading(false);
+
     return data;
   };
 
@@ -49,6 +58,7 @@ export default function AuthForm() {
     setLoading(true);
     const data = await signUp({ email, password });
     mountedRef.current && setLoading(false);
+
     return data;
   };
 
@@ -60,6 +70,8 @@ export default function AuthForm() {
     setPassword(event.currentTarget.value);
   };
 
+  // const customtId = 'yes';
+  console.log(error);
   return (
     <div className={s.form}>
       <p className={s.account}>You can use your Google Account to authorize:</p>
@@ -75,7 +87,7 @@ export default function AuthForm() {
       <p className={s.login}>Or login to our app using e-mail and password: </p>
       <form>
         <div className={s.formInput}>
-          <label>
+          <label className={s.formLabel}>
             <input
               className={s.input}
               type="email"
@@ -87,10 +99,10 @@ export default function AuthForm() {
             />
           </label>
 
-          <label>
+          <label className={s.formLabel}>
             <input
               className={s.input}
-              type="text"
+              type={showPassword ? 'password' : 'text'}
               name="password"
               value={password}
               placeholder="Password"
@@ -98,10 +110,18 @@ export default function AuthForm() {
               required
               autoComplete="off"
             />
+            <button onClick={handleClickShowPassword} className={s.eyeBtn}>
+              <img src={showPassword ? EyeHide : Eye} alt="hide-button" />
+            </button>
           </label>
           {error && (
             <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>
           )}
+          {/* {error && (
+            <p style={{ color: 'red', marginBottom: '15px', display: 'none' }}>
+              {toast.error(error, { toastId: customtId })}
+            </p>
+          )} */}
         </div>
         <div>
           <button onClick={handleLogin} type="submit" className={s.sign}>
