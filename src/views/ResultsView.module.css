@@ -83,6 +83,12 @@
   font-weight: var(--medium);
 }
 
+.errorMessage {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 28px;
+}
+
 @media screen and (max-width: 320px) {
   .container {
     padding-top: 30px;
