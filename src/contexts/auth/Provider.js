@@ -223,7 +223,6 @@ export default function Provider({ children }) {
       onGoogleLogin,
       getTest,
       fetchResults,
-
       error,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
