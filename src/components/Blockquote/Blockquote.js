@@ -1,4 +1,3 @@
-import React from 'react';
 import s from './Blockquote.module.css';
 
 export default function Blockquote() {

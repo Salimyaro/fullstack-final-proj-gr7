@@ -1,23 +1,24 @@
-import AslanovRustam from './img/AslanovRustam295.jpg';
-import SalimovYaroslav from './img/salimov_yaroslav295.jpg';
 import AnnaBychkova from './img/Anna Bychkova295.jpg';
-import SolomkaVitaliy from './img/solomka_vitaliy295.jpg';
-import BondarenkoSvetlana from './img/bondarenko_svetlana295.jpg';
-import TetianaKorobko from './img/Tetiana Korobko295-3.jpg';
-import defaultImg from './img/default4.jpg';
+import AslanovRustam from './img/AslanovRustam280.jpg';
+import BondarenkoSvetlana from './img/bondarenko_svetlana280.jpg';
+import MariaTrishch from './img/fot280.jpg';
 import Iskra from './img/iskra295-2.jpg';
+import SalimovYaroslav from './img/salimov_yaroslav280.jpg';
+import SolomkaVitaliy from './img/solomka_vitaliy280.jpg';
+import TetianaKorobko from './img/Tetiana Korobko280.jpg';
+import Tsotsko from './img/Tsotsko280.jpg';
 
 export const contactsDb = [
   {
     id: 1,
-    name: 'Aslanov Rustam',
+    name: 'Rustam Aslanov',
     url: 'https://github.com/AslanovRustam',
     photo: AslanovRustam,
     role: 'Scrum Master, Front-End Developer',
   },
   {
     id: 2,
-    name: 'Salimov Yaroslav',
+    name: 'Yaroslav Salimov',
     url: 'https://github.com/Salimyaro',
     photo: SalimovYaroslav,
     role: 'Team Lead, Back-End Developer',
@@ -31,14 +32,14 @@ export const contactsDb = [
   },
   {
     id: 4,
-    name: 'Solomka Vitaliy',
+    name: 'Vitaliy Solomka',
     url: 'https://github.com/dkvvs',
     photo: SolomkaVitaliy,
     role: 'Front-End Developer',
   },
   {
     id: 5,
-    name: 'Bondarenko Svetlana',
+    name: 'Svetlana Bondarenko',
     url: 'https://github.com/svogk',
     photo: BondarenkoSvetlana,
     role: 'Front-End Developer',
@@ -54,14 +55,14 @@ export const contactsDb = [
     id: 7,
     name: 'Maria Trishch',
     url: 'https://github.com/magrateya',
-    photo: defaultImg,
+    photo: MariaTrishch,
     role: 'Front-End Developer',
   },
   {
     id: 8,
     name: 'Alexandr Tsotsko',
     url: 'https://github.com/RaiderTs',
-    photo: defaultImg,
+    photo: Tsotsko,
     role: 'Back-End Developer',
   },
   {

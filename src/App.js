@@ -1,22 +1,24 @@
 import { useEffect, Suspense, lazy, useState, useContext } from 'react';
 import { Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { contactsDb } from './components/Contacts/contactsDb';
 import Container from './components/Container';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import LoaderBlur from './components/LoaderBlur';
 import AuthContext from './contexts/auth/context';
-import { contactsDb } from './components/Contacts/contactsDb';
-import Footer from './components/Footer';
 
 import PrivateRoute from './components/UserMenu/PrivateRoute';
 import PublicRoute from './components/UserMenu/PublicRoute';
+import AuthContext from './contexts/auth/context';
 
 const AuthPageView = lazy(() => import('./views/AuthPageView'));
 const MainPageView = lazy(() => import('./views/MainPageView'));
 const TestView = lazy(() => import('./views/TestView'));
-const ContactsPageView = lazy(() => import('./components/Contacts'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
+const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
+const ContactsPageView = lazy(() => import('./views/Contacts'));
 
 export default function App() {
   const [loding, setLoading] = useState(false);
@@ -26,6 +28,7 @@ export default function App() {
     setLoading(true);
     currentUser();
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -34,6 +37,9 @@ export default function App() {
       <Container>
         <Switch>
           <Suspense fallback={<LoaderBlur />}>
+            <PublicRoute exact path="/google-auth" redirectTo="/">
+              <GoogleAuth />
+            </PublicRoute>
             <PublicRoute exact path="/auth" redirectTo="/" restricted>
               <AuthPageView />
             </PublicRoute>

@@ -1,87 +1,27 @@
-.useContainer {
-  padding-top: 98px;
-  margin-left: 190px;
-  margin-bottom: 262px;
-}
-
-.usefulInfo {
-  width: 350px;
-  font-family: var(--main-font);
-  text-align: left;
-}
-
-.usefulInfo:not(:last-child) {
-  margin-bottom: 38px;
-}
-
-.title {
-  font-size: 22px;
-  line-height: 30px;
-  margin-bottom: 48px;
-  font-weight: var(--bold);
-  position: relative;
-}
-
-.title::after {
-  display: block;
-  width: 320px;
-  height: 1px;
-  background-color: var(--text-underline-color);
-  opacity: 0.15;
-  content: '';
+.bgImage {
+  /* background-image: url('../img/materials-bg.jpg'); */
+  background-image: url('../img/materialsBg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
   position: absolute;
-  top: 52px;
+  top: 0;
+  bottom: 0;
+  right: 0;
   left: 0;
 }
 
-.list {
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-  line-height: 22px;
-
-  margin-left: 62px;
-  font-weight: var(--medium);
-}
-
-.item {
-  padding-left: 5px;
-}
-
-@media (max-width: 768px) {
-  .useContainer {
-    padding-top: 120px;
-    margin-left: 115px;
-    margin-bottom: 416px;
+/* @media screen and (min-width: 768px) and (max-width: 1279px) {
+  .bgImage {
+    background-image: url('../img/materials-bg-tablet.jpg');
+    background-image: url('../img/materialsBg.jpg');
   }
 }
 
-@media (max-width: 320px) {
-  .useContainer {
-    padding-top: 40px;
-    margin-left: 20px;
-    margin-bottom: 112px;
+@media screen and (max-width: 767px) {
+  .bgImage {
+    background-image: url('../img/materials-bg-mobile.jpg');
+    background-image: url('../img/materialsBg.jpg');
   }
-
-  .usefulInfo {
-    width: 200px;
-  }
-
-  .title {
-    font-size: 18px;
-    line-height: 22px;
-    margin-bottom: 38px;
-    width: 120px;
-  }
-
-  .title::after {
-    width: 150px;
-    top: 70px;
-  }
-
-  .list {
-    font-size: 10px;
-    line-height: 16px;
-    margin-left: 0px;
-  }
-}
+} */

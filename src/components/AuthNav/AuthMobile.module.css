@@ -11,10 +11,8 @@
 }
 .navContactsMob {
   width: 100%;
-  /* min-height: 70px; */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border-bottom: 1px solid #ccc; */
   flex-direction: column;
 }

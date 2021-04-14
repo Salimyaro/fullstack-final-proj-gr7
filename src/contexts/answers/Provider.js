@@ -1,5 +1,5 @@
-import AnswersContext from './context';
 import { useState } from 'react';
+import AnswersContext from './context';
 
 const AnswersProvider = ({ children }) => {
   const [userAnswers, setUserAnswers] = useState([]);
@@ -25,8 +25,6 @@ const AnswersProvider = ({ children }) => {
       setUserAnswers(prevState => [...prevState, data]);
     }
   };
-
-  console.log(userAnswers);
 
   return (
     <AnswersContext.Provider

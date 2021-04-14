@@ -1,13 +1,13 @@
-import { useState, useMemo } from 'react';
-import authContext from './context';
 import axios from 'axios';
+import { useMemo, useState } from 'react';
+import authContext from './context';
+
 axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
+
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loding, setLoading] = useState(false);
-  console.log('state user:', user);
-  console.log('state isLoggedIn:', isLoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const token = {
     set(token) {
@@ -18,51 +18,195 @@ export default function Provider({ children }) {
     },
   };
 
-  const signUp = async user => {
-    const { data } = await axios.post('/auth/register', user);
+  function setTokensUserAndLogIn(data) {
+    window.localStorage.setItem(
+      'auth-tokens',
+      JSON.stringify({
+        token: data.data.token,
+        refreshToken: data.data.refreshToken,
+      }),
+    );
     setUser(data.data);
     setIsLoggedIn(true);
     token.set(data.data.token);
+  }
+
+  function logOutAndDeleteTokens() {
+    token.unset();
+    window.localStorage.removeItem('auth-tokens');
+    setIsLoggedIn(false);
+    setUser(null);
+    window.location.reload();
+    return;
+  }
+
+  const signUp = async user => {
+    const { data } = await axios.post('/auth/register', user);
+    setTokensUserAndLogIn(data);
     return data;
   };
 
   const onLogIn = async user => {
     const { data } = await axios.post('/auth/login', user);
-    setUser(data.data);
-    setIsLoggedIn(true);
-    token.set(data.data.token);
-    window.localStorage.setItem('token-stor', JSON.stringify(data.data.token));
+    setTokensUserAndLogIn(data);
     return data;
   };
 
   const onLogOut = async () => {
-    const { data } = await axios.post('/auth/logout');
-    setUser(null);
-    setIsLoggedIn(false);
-    token.unset();
-    window.localStorage.setItem('token-stor', JSON.stringify(''));
-    return data;
+    const authTokens = JSON.parse(window.localStorage.getItem('auth-tokens'));
+    try {
+      token.set(authTokens.token);
+      await axios.post('/auth/logout');
+      logOutAndDeleteTokens();
+      return;
+    } catch (e) {
+      if (e.response.status.toString() === '401') {
+        try {
+          token.set(authTokens.refreshToken);
+          const { data } = await axios.post('/auth/refresh');
+          window.localStorage.setItem(
+            'auth-tokens',
+            JSON.stringify({
+              token: data.data.token,
+              refreshToken: data.data.refreshToken,
+            }),
+          );
+          token.set(data.data.token);
+          await axios.post('/auth/logout');
+          window.location.reload();
+        } catch (e) {
+          logOutAndDeleteTokens();
+        }
+      }
+    }
+  };
+
+  const getTest = async type => {
+    const authTokens = JSON.parse(window.localStorage.getItem('auth-tokens'));
+    if (!authTokens) {
+      setIsLoggedIn(false);
+      return;
+    }
+    token.set(authTokens.token);
+    try {
+      const { data } = await axios.get(`/test/${type}`);
+      return data;
+    } catch (e) {
+      if (e.response.status.toString() === '401') {
+        const authTokens = JSON.parse(
+          window.localStorage.getItem('auth-tokens'),
+        );
+        token.set(authTokens.refreshToken);
+        try {
+          const { data } = await axios.post('/auth/refresh');
+          window.localStorage.setItem(
+            'auth-tokens',
+            JSON.stringify({
+              token: data.data.token,
+              refreshToken: data.data.refreshToken,
+            }),
+          );
+          token.set(data.data.token);
+          window.location.reload();
+        } catch (e) {
+          logOutAndDeleteTokens();
+        }
+      }
+    }
+  };
+
+  const fetchResults = async (answers, testType) => {
+    const authTokens = JSON.parse(window.localStorage.getItem('auth-tokens'));
+    if (!authTokens) {
+      setIsLoggedIn(false);
+      return;
+    }
+    token.set(authTokens.token);
+    try {
+      const { data } = await axios.post(`/results/${testType}`, answers);
+      return data;
+    } catch (e) {
+      if (e.response.status.toString() === '401') {
+        const authTokens = JSON.parse(
+          window.localStorage.getItem('auth-tokens'),
+        );
+        token.set(authTokens.refreshToken);
+        try {
+          const { data } = await axios.post('/auth/refresh');
+          window.localStorage.setItem(
+            'auth-tokens',
+            JSON.stringify({
+              token: data.data.token,
+              refreshToken: data.data.refreshToken,
+            }),
+          );
+          token.set(data.data.token);
+          window.location.reload();
+        } catch (e) {
+          logOutAndDeleteTokens();
+          return;
+        }
+      }
+    }
   };
 
   const currentUser = async () => {
-    if (!JSON.parse(window.localStorage.getItem('token-stor'))) {
+    const authTokens = JSON.parse(window.localStorage.getItem('auth-tokens'));
+    if (!authTokens) {
+      setIsLoggedIn(false);
       return;
     }
-    token.set(JSON.parse(window.localStorage.getItem('token-stor')));
+    token.set(authTokens.token);
+    try {
+      const { data } = await axios.get('/user');
+      setUser(data.data);
+      setIsLoggedIn(true);
+      return data;
+    } catch (e) {
+      if (e.response.status.toString() === '401') {
+        const authTokens = JSON.parse(
+          window.localStorage.getItem('auth-tokens'),
+        );
+        token.set(authTokens.refreshToken);
+        try {
+          const { data } = await axios.post('/auth/refresh');
+          window.localStorage.setItem(
+            'auth-tokens',
+            JSON.stringify({
+              token: data.data.token,
+              refreshToken: data.data.refreshToken,
+            }),
+          );
+          token.set(data.data.token);
+          return;
+        } catch (e) {
+          logOutAndDeleteTokens();
+        }
+      }
+    }
+  };
 
-    const { data } = await axios.get('/user');
-
-    setUser(data.data);
+  const onGoogleLogin = authTokens => {
+    window.localStorage.setItem('auth-tokens', JSON.stringify(authTokens));
     setIsLoggedIn(true);
-    return data;
+    currentUser();
+    return;
   };
 
   const providerValue = useMemo(() => {
-    return { user, isLoggedIn, onLogIn, onLogOut, signUp, currentUser };
+    return {
+      user,
+      isLoggedIn,
+      onLogIn,
+      onLogOut,
+      signUp,
+      currentUser,
+      onGoogleLogin,
+      getTest,
+      fetchResults,
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn, user]);
-
-  console.log('providerValue', providerValue);
 
   return (
     <authContext.Provider value={providerValue}>

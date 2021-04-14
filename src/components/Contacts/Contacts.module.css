@@ -63,6 +63,7 @@ p {
 }
 .contactPhoto {
   width: 100%;
+  height: auto;
   /* border-radius: 4px; */
   /* width: 295px; */
 }
@@ -88,9 +89,9 @@ p {
     padding-top: 10px;
   }
 
-  .contactCard {
+  /* .contactCard {
     width: 100%;
-  }
+  } */
   .contactsContainer {
     width: 280px;
     margin-bottom: 56px;

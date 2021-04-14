@@ -1,15 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Questions from '../components/Questions';
-import s from './TestView.module.css';
-import { getTest } from '../service/user-api';
-import arrowbr from '../img/arrow-br.svg';
-import arrowbl from '../img/arrow-bl.svg';
 import AnswersContext from '../contexts/answers/context';
+import AuthContext from '../contexts/auth/context';
+import arrowbl from '../img/arrow-bl.svg';
+import arrowbr from '../img/arrow-br.svg';
+import s from './TestView.module.css';
 
 export default function Test() {
-  const { setUserAnswers, handleAnswerTest } = useContext(AnswersContext);
   const [loding, setLoading] = useState(false);
+  const { getTest } = useContext(AuthContext);
+  const { userAnswers, setUserAnswers, handleAnswerTest } = useContext(
+    AnswersContext,
+  );
+
   const [questions, setQuestions] = useState([]);
   const [activeQuestionId, setActiveQuestionId] = useState(0);
 
@@ -23,9 +27,14 @@ export default function Test() {
     setLoading(true);
     getTest(testType).then(({ data }) => setQuestions(data.tests));
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testType]);
 
   const activeQuestionData = questions[activeQuestionId];
+
+  const isUserAnsvered = userAnswers.find(userAnswer => {
+    return userAnswer?.questionId === activeQuestionData?.questionId;
+  });
 
   const handleNextQuestion = () => {
     setActiveQuestionId(activeQuestionId + 1);
@@ -38,10 +47,6 @@ export default function Test() {
   const testingLabel =
     testType === 'tech' ? 'QA technical training' : 'Testing theory';
 
-  function reset() {
-    setUserAnswers([]);
-  }
-
   useEffect(() => {
     setUserAnswers([]);
   }, [setUserAnswers]);
@@ -51,15 +56,17 @@ export default function Test() {
   }
 
   const submitAnswers = () => {
-    history.push('/results');
+    history.push(`/results?type=${testType}`);
   };
+
+  const isActive = !isUserAnsvered ? `${s.nextButtonActiv}` : `${s.nextButton}`;
 
   return (
     <div className={s.buttonContainer}>
       <div className={s.finishContainer}>
         <p className={s.title}>[ {testingLabel}&#95; ]</p>
-        <Link to="/" exact>
-          <button className={s.buttonFinish} onClick={reset}>
+        <Link to="/">
+          <button className={s.buttonFinish}>
             <span className={s.buttonName}>Cancel test</span>
           </button>
         </Link>
@@ -71,6 +78,7 @@ export default function Test() {
         title={activeQuestionData.question}
         answers={activeQuestionData.answers}
         onAnswerChange={handleAnswerTest}
+        defaultValue={isUserAnsvered?.answer}
       />
       <div className={s.nextPrevContainer}>
         {activeQuestionId !== 0 && (
@@ -86,11 +94,19 @@ export default function Test() {
           </button>
         )}
         {activeQuestionId === 11 ? (
-          <button className={s.nextButton} onClick={submitAnswers}>
+          <button
+            disabled={!isUserAnsvered}
+            className={isActive}
+            onClick={submitAnswers}
+          >
             <span className={s.submitName}>Submit</span>
           </button>
         ) : (
-          <button onClick={handleNextQuestion} className={s.nextButton}>
+          <button
+            disabled={!isUserAnsvered}
+            onClick={handleNextQuestion}
+            className={isActive}
+          >
             <span className={s.nextName}>Next question</span>
             <img
               className={s.arrowRight}

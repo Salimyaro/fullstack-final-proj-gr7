@@ -17,7 +17,7 @@
   height: 70px;
   background-color: var(--header-lines);
 }
-@media (min-width: 561px) {
+@media (min-width: 767px) {
   .sandw {
     display: none;
   }
