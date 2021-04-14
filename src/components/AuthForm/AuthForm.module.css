@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
 
-  width: 280px;
+  max-width: 280px;
   padding: 15px 20px 15px 20px;
   font-weight: var(--medium);
   font-family: var(--main-font);
@@ -88,7 +88,7 @@
 
 @media screen and (min-width: 768px) {
   .form {
-    width: 539px;
+    max-width: 539px;
     padding: 30px 57px 30px 57px;
     font-size: 14px;
   }
@@ -118,7 +118,7 @@
 
 @media screen and (min-width: 1280px) {
   .form {
-    width: 505px;
+    max-width: 505px;
     flex-direction: column;
     padding: 62px 40px 42px 42px;
   }
@@ -135,5 +135,20 @@
 
   .sign {
     height: 60px;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .form {
+    width: 100%;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .sign:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 10px;
   }
 }
