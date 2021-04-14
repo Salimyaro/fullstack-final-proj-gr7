@@ -25,7 +25,7 @@ export default function Results() {
   }, []);
 
   const correctAnswers = results
-    ? Math.floor((12 * results.data.result) / 100)
+    ? Math.floor((results.data.result * 100) / 12)
     : null;
 
   return results ? (
@@ -34,12 +34,12 @@ export default function Results() {
       <p className={s.testTitle}>[{testingLabel.toUpperCase()}_]</p>
       <div className={s.lineBreak}></div>
       <ResultsChart
-        correctAnswers={results.data.result}
-        incorrectAnswers={100 - results.data.result}
+        correctAnswers={correctAnswers}
+        incorrectAnswers={100 - correctAnswers}
       />
       <div className={s.resultsBar}>
         <span>
-          Correct answers - <b>{correctAnswers}</b>
+          Correct answers - <b>{results.data.result}</b>
         </span>
         <span className={s.breaker}>|</span>
         <span>
