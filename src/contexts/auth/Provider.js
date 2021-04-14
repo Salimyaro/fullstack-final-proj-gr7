@@ -8,6 +8,7 @@ export default function Provider({ children }) {
   const [user, setUser] = useState(null);
   const [loding, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [error, setError] = useState(null);
 
   const token = {
     set(token) {
@@ -41,15 +42,33 @@ export default function Provider({ children }) {
   }
 
   const signUp = async user => {
-    const { data } = await axios.post('/auth/register', user);
-    setTokensUserAndLogIn(data);
-    return data;
+    try {
+      const { data } = await axios.post('/auth/register', user);
+      setTokensUserAndLogIn(data);
+      return data;
+    } catch (e) {
+      if (e.response.status.toString() === '409') {
+        setError(e.response.data.message);
+      }
+      if (e.response.status.toString() === '400') {
+        setError(e.response.data.message);
+      }
+    }
   };
 
   const onLogIn = async user => {
-    const { data } = await axios.post('/auth/login', user);
-    setTokensUserAndLogIn(data);
-    return data;
+    try {
+      const { data } = await axios.post('/auth/login', user);
+      setTokensUserAndLogIn(data);
+      return data;
+    } catch (e) {
+      if (e.response.status.toString() === '403') {
+        setError(e.response.data.message);
+      }
+      if (e.response.status.toString() === '400') {
+        setError(e.response.data.message);
+      }
+    }
   };
 
   const onLogOut = async () => {
@@ -204,9 +223,11 @@ export default function Provider({ children }) {
       onGoogleLogin,
       getTest,
       fetchResults,
+
+      error,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn, user]);
+  }, [isLoggedIn, user, error]);
 
   return (
     <authContext.Provider value={providerValue}>

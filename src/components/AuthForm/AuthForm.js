@@ -1,4 +1,6 @@
-import { useContext, useState } from 'react';
+import Button from '@material-ui/core/Button';
+import { Box } from '@material-ui/core';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../assets/variables.css';
@@ -9,8 +11,15 @@ import { ReactComponent as GoogleIcon } from 'img/google-symbol.svg';
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loding, setLoading] = useState(false);
-  const { onLogIn, signUp } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const { onLogIn, signUp, error } = useContext(AuthContext);
+
+  const mountedRef = useRef(true);
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   const handleLogin = async event => {
     event.preventDefault();
@@ -23,21 +32,23 @@ export default function AuthForm() {
     }
     setLoading(true);
     const data = await onLogIn({ email, password });
-    setLoading(false);
+    mountedRef.current && setLoading(false);
     return data;
   };
 
   const handleRegister = async event => {
     event.preventDefault();
+
     if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
       toast.dark(
         'E-mail must be valid and the password must be longer than 5 characters!',
       );
       return;
     }
+
     setLoading(true);
     const data = await signUp({ email, password });
-    setLoading(false);
+    mountedRef.current && setLoading(false);
     return data;
   };
 
@@ -75,6 +86,7 @@ export default function AuthForm() {
               required
             />
           </label>
+
           <label>
             <input
               className={s.input}
@@ -87,6 +99,9 @@ export default function AuthForm() {
               autoComplete="off"
             />
           </label>
+          {error && (
+            <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>
+          )}
         </div>
         <div>
           <button onClick={handleLogin} type="submit" className={s.sign}>
