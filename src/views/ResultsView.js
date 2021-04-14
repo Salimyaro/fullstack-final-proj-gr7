@@ -1,21 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ResultsChart from '../components/PieChart';
-import AnswersContext from '../contexts/answers/context';
 import AuthContext from '../contexts/auth/context';
 import cat from '../img/cat.png';
 import catSmall from '../img/cat_120px.png';
 import s from './ResultsView.module.css';
 
 export default function Results() {
-  const { userAnswers } = useContext(AnswersContext);
   const { fetchResults } = useContext(AuthContext);
   const [results, setResults] = useState(null);
   const location = useLocation();
   const testType = new URLSearchParams(location.search).get('type');
 
-  const answers = { answers: userAnswers };
-  console.log('UserAnswers: ', userAnswers);
+  const answers = {
+    answers: JSON.parse(localStorage.getItem('answers')),
+  };
+
   const testingLabel =
     testType === 'tech' ? 'QA technical training' : 'Testing theory';
 

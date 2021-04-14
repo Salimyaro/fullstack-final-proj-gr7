@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import Questions from '../components/Questions';
-import AnswersContext from '../contexts/answers/context';
 import AuthContext from '../contexts/auth/context';
 import arrowbl from '../img/arrow-bl.svg';
 import arrowbr from '../img/arrow-br.svg';
@@ -10,9 +9,8 @@ import s from './TestView.module.css';
 export default function Test() {
   const [loding, setLoading] = useState(false);
   const { getTest } = useContext(AuthContext);
-  const { userAnswers, setUserAnswers, handleAnswerTest } = useContext(
-    AnswersContext,
-  );
+
+  const [userAnswers, setUserAnswers] = useState([]);
 
   const [questions, setQuestions] = useState([]);
   const [activeQuestionId, setActiveQuestionId] = useState(0);
@@ -44,6 +42,28 @@ export default function Test() {
     setActiveQuestionId(activeQuestionId - 1);
   };
 
+  const handleAnswerTest = data => {
+    const isAnswerSet = userAnswers.find(
+      answer => answer.questionId === data.questionId,
+    );
+
+    if (isAnswerSet) {
+      setUserAnswers(prevState =>
+        prevState.map(el => {
+          if (el.questionId === isAnswerSet.questionId) {
+            return {
+              ...el,
+              answer: data.answer,
+            };
+          }
+          return el;
+        }),
+      );
+    } else {
+      setUserAnswers(prevState => [...prevState, data]);
+    }
+  };
+
   const testingLabel =
     testType === 'tech' ? 'QA technical training' : 'Testing theory';
 
@@ -56,6 +76,7 @@ export default function Test() {
   }
 
   const submitAnswers = () => {
+    window.localStorage.setItem('answers', JSON.stringify(userAnswers));
     history.push(`/results?type=${testType}`);
   };
 
