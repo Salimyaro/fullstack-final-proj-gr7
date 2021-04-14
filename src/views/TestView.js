@@ -8,6 +8,7 @@ import arrowbr from '../img/arrow-br.svg';
 import s from './TestView.module.css';
 
 export default function Test() {
+  const [loding, setLoading] = useState(false);
   const { getTest } = useContext(AuthContext);
   const { userAnswers, setUserAnswers, handleAnswerTest } = useContext(
     AnswersContext,
@@ -23,9 +24,9 @@ export default function Test() {
   const testType = search.get('type');
 
   useEffect(() => {
-    getTest(testType).then(res => {
-      setQuestions(res.data.tests);
-    });
+    setLoading(true);
+    getTest(testType).then(({ data }) => setQuestions(data.tests));
+    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testType]);
 

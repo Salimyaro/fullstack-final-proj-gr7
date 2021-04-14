@@ -1,11 +1,13 @@
-import { lazy, Suspense, useContext, useEffect } from 'react';
+import { useEffect, Suspense, lazy, useState, useContext } from 'react';
 import { Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { contactsDb } from './components/Contacts/contactsDb';
 import Container from './components/Container';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Loader from './components/Loader';
+import LoaderBlur from './components/LoaderBlur';
+import AuthContext from './contexts/auth/context';
+
 import PrivateRoute from './components/UserMenu/PrivateRoute';
 import PublicRoute from './components/UserMenu/PublicRoute';
 import AuthContext from './contexts/auth/context';
@@ -19,11 +21,13 @@ const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
 const ContactsPageView = lazy(() => import('./views/Contacts'));
 
 export default function App() {
+  const [loding, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
+    setLoading(true);
     currentUser();
-
+    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,7 +36,7 @@ export default function App() {
       <Header />
       <Container>
         <Switch>
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<LoaderBlur />}>
             <PublicRoute exact path="/google-auth" redirectTo="/">
               <GoogleAuth />
             </PublicRoute>

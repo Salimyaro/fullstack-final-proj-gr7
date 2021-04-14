@@ -6,6 +6,7 @@ axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
+  const [loding, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const token = {

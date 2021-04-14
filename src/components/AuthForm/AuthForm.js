@@ -1,3 +1,5 @@
+import Button from '@material-ui/core/Button';
+import { Box } from '@material-ui/core';
 import { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,17 +10,22 @@ import s from './AuthForm.module.css';
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loding, setLoading] = useState(false);
   const { onLogIn, signUp } = useContext(AuthContext);
 
   const handleLogin = async event => {
     event.preventDefault();
+
     if (!/\S+@\S+\.\S{2,}/.test(email.trim()) || password.trim().length < 6) {
       toast.dark(
         'E-mail must be valid and the password must be longer than 5 characters!',
       );
       return;
     }
-    return await onLogIn({ email, password });
+    setLoading(true);
+    const data = await onLogIn({ email, password });
+    setLoading(false);
+    return data
   };
 
   const handleRegister = async event => {
@@ -29,7 +36,10 @@ export default function AuthForm() {
       );
       return;
     }
-    return await signUp({ email, password });
+    setLoading(true);
+    const data = await signUp({ email, password });
+    setLoading(false);
+    return data
   };
 
   const handleChangeEmail = event => {
