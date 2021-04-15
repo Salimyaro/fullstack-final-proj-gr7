@@ -27,6 +27,7 @@ export default function AuthForm() {
       );
       return;
     }
+    setLoading(true);
     onLogIn({ email, password });
   };
 
@@ -38,6 +39,7 @@ export default function AuthForm() {
       );
       return;
     }
+    setLoading(true);
     onSignUp({ email, password });
   };
 
@@ -47,6 +49,10 @@ export default function AuthForm() {
 
   const handleChangePassword = event => {
     setPassword(event.currentTarget.value);
+  };
+
+  const googleClikcHandler = () => {
+    setLoading(true);
   };
   useEffect(() => {
     setLoading(false);
@@ -58,8 +64,9 @@ export default function AuthForm() {
       <p className={s.account}>You can use your Google Account to authorize:</p>
       <div className={s.buttonGoogle}>
         <a
-          href="https://fin-proj-gr7.herokuapp.com/auth/google"
+          href="https://goit-solo-tests-final-prg.herokuapp.com/auth/google"
           className={s.authGoogle}
+          onClick={googleClikcHandler}
         >
           <GoogleIcon width="18" height="18" className={s.icon} />
           Google
