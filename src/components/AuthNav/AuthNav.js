@@ -11,8 +11,8 @@ export default function AuthNav() {
   const { setLoading } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => setIsModalOpen(state => !state);
-  const handleNavLink = () => {
-    setLoading(true);
+  const handleNavLink = e => {
+    window.location.href !== e.target.href && setLoading(true);
     toggleModal();
   };
   return (
