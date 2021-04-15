@@ -10,6 +10,7 @@
   bottom: 0;
   right: 0;
   left: 0;
+  overflow-y: scroll;
 }
 
 /* @media screen and (min-width: 768px) and (max-width: 1279px) {

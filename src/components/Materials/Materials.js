@@ -1,8 +1,15 @@
+import { useContext, useEffect } from 'react';
 import books from '../../assets/materials/literature.json';
 import resources from '../../assets/materials/resources.json';
+import AuthContext from '../../contexts/auth/context';
 import s from './Materials.module.css';
 
 export default function Materials() {
+  const { setLoading } = useContext(AuthContext);
+  useEffect(() => {
+    setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className={s.useContainer}>
       <div className={s.usefulInfo}>

@@ -5,7 +5,7 @@ import { contactsDb } from './components/Contacts/contactsDb';
 import Container from './components/Container';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Loader from './components/Loader';
+import LoaderBlur from './components/LoaderBlur';
 import PrivateRoute from './components/UserMenu/PrivateRoute';
 import PublicRoute from './components/UserMenu/PublicRoute';
 import AuthContext from './contexts/auth/context';
@@ -16,12 +16,12 @@ const TestView = lazy(() => import('./views/TestView'));
 const UsefulInfoView = lazy(() => import('./views/UsefulInfoView'));
 const ResultsView = lazy(() => import('./views/ResultsView'));
 const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
-const ContactsPageView = lazy(() => import('./components/Contacts'));
+const ContactsPageView = lazy(() => import('./views/Contacts'));
 
 export default function App() {
-  const { currentUser } = useContext(AuthContext);
-
+  const { currentUser, loading, setLoading } = useContext(AuthContext);
   useEffect(() => {
+    setLoading(true);
     currentUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -31,7 +31,7 @@ export default function App() {
       <Header />
       <Container>
         <Switch>
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<LoaderBlur />}>
             <PublicRoute exact path="/google-auth" redirectTo="/">
               <GoogleAuth />
             </PublicRoute>
@@ -59,6 +59,7 @@ export default function App() {
         <ToastContainer autoClose={3000} />
       </Container>
       <Footer />
+      {loading && <LoaderBlur />}
     </>
   );
 }

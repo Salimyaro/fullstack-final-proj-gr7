@@ -21,7 +21,7 @@ export const contactsDb = [
     name: 'Yaroslav Salimov',
     url: 'https://github.com/Salimyaro',
     photo: SalimovYaroslav,
-    role: 'Team Lead, Back-End Developer',
+    role: 'Team Lead, Full-Stack Developer',
   },
   {
     id: 3,
