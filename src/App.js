@@ -1,4 +1,4 @@
-import { lazy, Suspense, useContext, useEffect, useState } from 'react';
+import { lazy, Suspense, useContext, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { contactsDb } from './components/Contacts/contactsDb';
@@ -19,13 +19,10 @@ const GoogleAuth = lazy(() => import('./views/GoogleAuth'));
 const ContactsPageView = lazy(() => import('./views/Contacts'));
 
 export default function App() {
-  const [loding, setLoading] = useState(false);
-  const { currentUser } = useContext(AuthContext);
-
+  const { currentUser, loading, setLoading } = useContext(AuthContext);
   useEffect(() => {
     setLoading(true);
     currentUser();
-    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -62,6 +59,7 @@ export default function App() {
         <ToastContainer autoClose={3000} />
       </Container>
       <Footer />
+      {loading && <LoaderBlur />}
     </>
   );
 }

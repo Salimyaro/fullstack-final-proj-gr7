@@ -2,15 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ResultsChart from '../components/PieChart';
 import AuthContext from '../contexts/auth/context';
-import LoaderBlur from '../components/LoaderBlur';
 import cat from '../img/cat.png';
 import catSmall from '../img/cat_120px.png';
 import s from './ResultsView.module.css';
 
 export default function Results() {
-  const { fetchResults } = useContext(AuthContext);
+  const { fetchResults, setLoading } = useContext(AuthContext);
   const [results, setResults] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const location = useLocation();
   const testType = new URLSearchParams(location.search).get('type');
@@ -22,24 +20,29 @@ export default function Results() {
   const testingLabel =
     testType === 'tech' ? 'QA technical training' : 'Testing theory';
 
-  useEffect(() => {
+  const handleNavLink = () => {
     setLoading(true);
+  };
+
+  useEffect(() => {
     fetchResults(answers, testType)
       .then(res => {
         setResults(res);
         setLoading(false);
       })
-      .catch(err => setError(err));
+      .catch(err => {
+        setError(err);
+        setLoading(false);
+      });
     // eslint-disable-next-line
   }, []);
 
   const correctAnswers = results
     ? Math.floor((results.data.result * 100) / 12)
     : null;
-
   return (
     <>
-      {results ? (
+      {results && (
         <div className={s.container}>
           <h2 className={s.heading}>Results</h2>
           <p className={s.testTitle}>[{testingLabel.toUpperCase()}_]</p>
@@ -66,14 +69,15 @@ export default function Results() {
 
           <h2 className={s.heading}>{results.data.mainMessage}</h2>
           <p className={s.resultsMessage}>{results.data.secondaryMessage}</p>
-          <Link className={s.button} to={`/test?type=${testType}`}>
+          <Link
+            className={s.button}
+            to={`/test?type=${testType}`}
+            onClick={handleNavLink}
+          >
             Try again
           </Link>
         </div>
-      ) : (
-        <div className={s.errorMessage}>Plase complete the test first</div>
       )}
-      {loading && <LoaderBlur />}
       {error && <div>{error}</div>}
     </>
   );

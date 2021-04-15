@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import AuthContext from '../../contexts/auth/context';
+
 import Modal from '../Modal';
 import SandwBtn from '../SandwBtn';
 import styles from './AuthMobile.module.css';
 import s from './AuthNav.module.css';
 
 export default function AuthNav() {
+  const { setLoading } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => setIsModalOpen(state => !state);
+  const handleNavLink = () => {
+    setLoading(true);
+    toggleModal();
+  };
   return (
     <>
       <div className={s.navContacts}>
@@ -37,7 +44,7 @@ export default function AuthNav() {
                 to="/contacts"
                 className={styles.linkMob}
                 activeClassName={s.activeLink}
-                onClick={toggleModal}
+                onClick={handleNavLink}
               >
                 Contacts
               </NavLink>

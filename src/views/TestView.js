@@ -7,29 +7,24 @@ import arrowbr from '../img/arrow-br.svg';
 import s from './TestView.module.css';
 
 export default function Test() {
-  const [loding, setLoading] = useState(false);
-  const { getTest } = useContext(AuthContext);
-
+  const { getTest, setLoading } = useContext(AuthContext);
   const [userAnswers, setUserAnswers] = useState([]);
-
   const [questions, setQuestions] = useState([]);
   const [activeQuestionId, setActiveQuestionId] = useState(0);
-
   const history = useHistory();
-
   const query = useLocation().search;
   const search = new URLSearchParams(query);
   const testType = search.get('type');
 
   useEffect(() => {
-    setLoading(true);
-    getTest(testType).then(({ data }) => setQuestions(data.tests));
-    setLoading(false);
+    getTest(testType).then(({ data }) => {
+      setQuestions(data.tests);
+      setLoading(false);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testType]);
 
   const activeQuestionData = questions[activeQuestionId];
-
   const isUserAnsvered = userAnswers.find(userAnswer => {
     return userAnswer?.questionId === activeQuestionData?.questionId;
   });
@@ -46,7 +41,6 @@ export default function Test() {
     const isAnswerSet = userAnswers.find(
       answer => answer.questionId === data.questionId,
     );
-
     if (isAnswerSet) {
       setUserAnswers(prevState =>
         prevState.map(el => {
@@ -63,6 +57,9 @@ export default function Test() {
       setUserAnswers(prevState => [...prevState, data]);
     }
   };
+  const handleNavLink = () => {
+    setLoading(true);
+  };
 
   const testingLabel =
     testType === 'tech' ? 'QA technical training' : 'Testing theory';
@@ -76,6 +73,7 @@ export default function Test() {
   }
 
   const submitAnswers = () => {
+    setLoading(true);
     window.localStorage.setItem('answers', JSON.stringify(userAnswers));
     history.push(`/results?type=${testType}`);
   };
@@ -86,7 +84,7 @@ export default function Test() {
     <div className={s.buttonContainer}>
       <div className={s.finishContainer}>
         <p className={s.title}>[ {testingLabel}&#95; ]</p>
-        <Link to="/">
+        <Link to="/" onClick={handleNavLink}>
           <button className={s.buttonFinish}>
             <span className={s.buttonName}>Cancel test</span>
           </button>

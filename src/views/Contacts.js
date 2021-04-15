@@ -1,7 +1,20 @@
+import { useContext, useState, useEffect } from 'react';
+import AuthContext from '../contexts/auth/context';
 import ContactCard from '../components/Contacts/contact-card';
 import s from '../components/Contacts/Contacts.module.css';
 
 export default function Contacts({ items }) {
+  const { setLoading } = useContext(AuthContext);
+  const [loadedImages, setLoadedImages] = useState(0);
+  const toggleLoadind = () => {
+    setLoadedImages(prev => prev + 1);
+  };
+  useEffect(() => {
+    if (loadedImages === items.length) {
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadedImages]);
   return (
     <>
       <div className={s.contactsContainer}>
@@ -16,6 +29,7 @@ export default function Contacts({ items }) {
                 url={item.url}
                 photo={item.photo}
                 role={item.role}
+                onload={toggleLoadind}
               />
             </li>
           ))}

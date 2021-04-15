@@ -1,8 +1,14 @@
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import AuthContext from '../../contexts/auth/context';
 import style from '../AuthNav/AuthNav.module.css';
 
 export default function NavLinks({ onClick }) {
+  const { setLoading } = useContext(AuthContext);
+  const handleNavLink = e => {
+    window.location.href !== e.target.href && setLoading(true);
+    onClick && onClick();
+  };
   return (
     <ul className={style.navList}>
       <li>
@@ -11,7 +17,7 @@ export default function NavLinks({ onClick }) {
           to="/"
           className={style.link}
           activeClassName={style.activeLink}
-          onClick={onClick}
+          onClick={handleNavLink}
         >
           Home
         </NavLink>
@@ -21,7 +27,7 @@ export default function NavLinks({ onClick }) {
           to="/useful-info"
           className={style.link}
           activeClassName={style.activeLink}
-          onClick={onClick}
+          onClick={handleNavLink}
         >
           Materials
         </NavLink>
@@ -31,7 +37,7 @@ export default function NavLinks({ onClick }) {
           to="/contacts"
           className={style.link}
           activeClassName={style.activeLink}
-          onClick={onClick}
+          onClick={handleNavLink}
         >
           Contacts
         </NavLink>

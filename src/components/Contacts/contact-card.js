@@ -1,10 +1,11 @@
 import s from './Contacts.module.css';
 
-export default function ContactsCard({ name, url, photo, role }) {
+export default function ContactsCard({ name, url, photo, role, onload }) {
   return (
     <a className={s.contactLink} target="_blank" rel="noreferrer" href={url}>
       <picture>
         <img
+          onLoad={onload}
           className={s.contactPhoto}
           src={photo}
           alt={name}
