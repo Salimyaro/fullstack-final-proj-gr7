@@ -58,7 +58,7 @@ export default function AuthForm() {
       <p className={s.account}>You can use your Google Account to authorize:</p>
       <div className={s.buttonGoogle}>
         <a
-          href="https://goit-solo-tests-final-prg.herokuapp.com/auth/google"
+          href="https://fin-proj-gr7.herokuapp.com/auth/google"
           className={s.authGoogle}
         >
           <GoogleIcon width="18" height="18" className={s.icon} />
