@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import authContext from './context';
 
-axios.defaults.baseURL = 'https://fin-proj-gr7.herokuapp.com/';
+axios.defaults.baseURL = 'https://fin-proj-gr7.herokuapp.com';
 
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
