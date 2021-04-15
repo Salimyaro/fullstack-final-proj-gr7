@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import authContext from './context';
 
-axios.defaults.baseURL = 'https://fin-proj-gr7.herokuapp.com';
+axios.defaults.baseURL = 'https://goit-solo-tests-final-prg.herokuapp.com';
 
 export default function Provider({ children }) {
   const [user, setUser] = useState(null);
@@ -50,17 +50,16 @@ export default function Provider({ children }) {
     } catch (e) {
       if (e.response.status.toString() === '409') {
         toast.warning(`${e.response.data.message}`);
+        setLoading(false);
       }
       if (e.response.status.toString() === '400') {
         toast.warning(`${e.response.data.message}`);
+        setLoading(false);
       }
-    } finally {
-      // setLoading(false);
     }
   };
 
   const onLogIn = async user => {
-    // setLoading(true);
     try {
       const { data } = await axios.post('/auth/login', user);
       setTokensUserAndLogIn(data);
@@ -68,17 +67,16 @@ export default function Provider({ children }) {
     } catch (e) {
       if (e.response.status.toString() === '403') {
         toast.warning(`${e.response.data.message}`);
+        setLoading(false);
       }
       if (e.response.status.toString() === '400') {
         toast.warning(`${e.response.data.message}`);
+        setLoading(false);
       }
-    } finally {
-      // setLoading(false);
     }
   };
 
   const onLogOut = async () => {
-    // setLoading(true);
     const authTokens = JSON.parse(window.localStorage.getItem('auth-tokens'));
     try {
       token.set(authTokens.token);
@@ -104,13 +102,10 @@ export default function Provider({ children }) {
           logOutAndDeleteTokens();
         }
       }
-    } finally {
-      // setLoading(false);
     }
   };
 
   const getTest = async type => {
-    // setLoading(true);
     const authTokens = JSON.parse(window.localStorage.getItem('auth-tokens'));
     if (!authTokens) {
       setIsLoggedIn(false);
@@ -141,13 +136,10 @@ export default function Provider({ children }) {
           logOutAndDeleteTokens();
         }
       }
-    } finally {
-      // setLoading(false);
     }
   };
 
   const fetchResults = async (answers, testType) => {
-    // setLoading(true);
     const authTokens = JSON.parse(window.localStorage.getItem('auth-tokens'));
     if (!authTokens) {
       setIsLoggedIn(false);
@@ -179,17 +171,13 @@ export default function Provider({ children }) {
           return;
         }
       }
-    } finally {
-      // setLoading(false);
     }
   };
 
   const currentUser = async () => {
-    // setLoading(true);
     const authTokens = JSON.parse(window.localStorage.getItem('auth-tokens'));
     if (!authTokens) {
       setIsLoggedIn(false);
-      // setLoading(false);
       return;
     }
     token.set(authTokens.token);
@@ -220,8 +208,6 @@ export default function Provider({ children }) {
           logOutAndDeleteTokens();
         }
       }
-    } finally {
-      // setLoading(false);
     }
   };
 
