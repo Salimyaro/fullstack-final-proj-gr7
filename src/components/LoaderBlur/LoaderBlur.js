@@ -8,7 +8,6 @@ export default function LoaderBlur() {
   const { setLoading } = useContext(AuthContext);
 
   const handleClick = () => {
-    console.log('click');
     setLoading(true);
     window.location.reload();
   };
