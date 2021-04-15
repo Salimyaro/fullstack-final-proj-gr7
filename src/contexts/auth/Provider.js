@@ -9,9 +9,7 @@ export default function Provider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
+  useEffect(() => {}, [loading]);
 
   const token = {
     set(token) {
